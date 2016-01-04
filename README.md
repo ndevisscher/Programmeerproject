@@ -1,4 +1,5 @@
 ## Programmeerproject
+Niek de Visscher (10667474)
 
 ### App-titel:  
 	Receptenhulp
