@@ -21,8 +21,8 @@ De app zal een hulpmiddel zijn om recepten te vinden gegeven ingredienten. Hierd
 * Een lijst van verschillende maaltijden moet in de app staan
 * Selecteren van een maaltijd toont de ingrediënten en bereidingswijze
 * Ingrediënten van een maaltijd moeten kunnen worden opgezocht
-* Zoekfunctie voor ingrediënten, mensen en groepen 
 * Registratie van mensen met hun allergiën
+* Zoekfunctie moet de allergiën van geselecteerde mensen meenemen 
 
 ### Platform: ###
 Vanuit android app studio zal de app worden gebouwd. Dit ondersteund het gebruik van lijsten/dataverzamelingen en maakt het implementeren van zoekmachines redelijk makkelijk.
