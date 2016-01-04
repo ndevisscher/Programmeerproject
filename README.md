@@ -33,3 +33,5 @@ Een groot genoege dataset vinden voor de recepten kan moeilijk zijn en het imple
 
 ### Gelijksoortige apps: ###
 De Appie App is een app die vorig gericht is op het vinden van maaltijden aan de hand van ingrediënten, maar deze heeft geen optie om ingrediënten uit te sluiten. Ze hebben wel verschillende filters die het mogelijk maken om op verschillende aspecten te sorteren voor maaltijden/recepten.
+
+![alt text](https://github.com/ndevisscher/Programmeerproject/doc/schets.png "1")
