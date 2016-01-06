@@ -1,5 +1,6 @@
 package mprog.nl.receptenhulp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -11,21 +12,24 @@ import android.view.MenuItem;
 
 public class HomeScreen extends AppCompatActivity {
 
+    DatabaseHelper myDB;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        myDB = new DatabaseHelper(this);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+    }
+
+    public void FindRecipe (View view) {
+        Intent intent = new Intent(this, RecipeFinder.class);
+        startActivity(intent);
+    }
+
+    public void test (View view) {
+        Intent intent = new Intent(this, selected_recipe.class);
+        startActivity(intent);
     }
 
     @Override

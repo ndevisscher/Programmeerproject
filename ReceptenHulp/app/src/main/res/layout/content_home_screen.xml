@@ -17,7 +17,8 @@
         android:text="Recepten vinden"
         android:id="@+id/button2"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:onClick="FindRecipe" />
 
     <Button
         android:layout_width="wrap_content"
@@ -26,7 +27,8 @@
         android:id="@+id/button"
         android:layout_marginBottom="44dp"
         android:layout_above="@+id/button4"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:onClick="test" />
 
     <Button
         android:layout_width="wrap_content"
@@ -36,7 +38,8 @@
         android:layout_alignParentBottom="true"
         android:layout_alignLeft="@+id/button"
         android:layout_alignStart="@+id/button"
-        android:layout_marginBottom="58dp" />
+        android:layout_marginBottom="58dp"
+        android:onClick="ChangePeople"/>
 
     <TextView
         android:layout_width="wrap_content"

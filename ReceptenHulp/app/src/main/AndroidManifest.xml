@@ -25,7 +25,15 @@
         <activity
             android:name=".AddPerson"
             android:label="@string/title_activity_add_person"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".selected_recipe"
+            android:label="@string/title_activity_selected_recipe"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".SearchedRecipes"
+            android:label="@string/title_activity_main"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>
