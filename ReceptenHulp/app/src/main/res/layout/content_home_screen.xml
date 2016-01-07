@@ -28,7 +28,7 @@
         android:layout_marginBottom="44dp"
         android:layout_above="@+id/button4"
         android:layout_centerHorizontal="true"
-        android:onClick="test" />
+        android:onClick="addRecipe" />
 
     <Button
         android:layout_width="wrap_content"

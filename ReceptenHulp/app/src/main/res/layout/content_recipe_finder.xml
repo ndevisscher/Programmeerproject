@@ -15,11 +15,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Zoek recepten"
-        android:id="@+id/Search"
+        android:id="@+id/search"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:onClick="Search"/>
+        android:onClick="searchRecipe"/>
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -27,7 +27,7 @@
         android:layout_height="wrap_content"
         android:text="Ga terug"
         android:id="@+id/Return"
-        android:layout_alignBottom="@+id/Search"
+        android:layout_alignBottom="@+id/search"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:onClick="ReturnHome"/>
@@ -35,46 +35,31 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/IngrediëntInput"
+        android:id="@+id/ingsIn"
         android:layout_marginTop="129dp"
         android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_toLeftOf="@+id/Add"
+        android:layout_toStartOf="@+id/Add" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Voeg ingrediënt toe"
         android:id="@+id/Add"
-        android:layout_below="@+id/IngrediëntInput"
-        android:layout_centerHorizontal="true"
-        android:onClick="DatabaseTest"/>
+        android:onClick="addings"
+        android:layout_alignTop="@+id/ingsIn"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
-    <ImageView
-        android:layout_width="65dp"
-        android:layout_height="65dp"
-        android:id="@+id/PeopleSelect"
-        android:layout_centerVertical="true"
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ingsList"
+        android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/Add" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="New Text"
-        android:id="@+id/PeopleName"
-        android:layout_toRightOf="@+id/PeopleSelect"
-        android:layout_toEndOf="@+id/PeopleSelect" />
-
-    <CheckBox
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Eet mee"
-        android:id="@+id/PeopleCheck"
-        android:layout_alignBottom="@+id/PeopleSelect"
-        android:layout_alignRight="@+id/IngrediëntInput"
-        android:layout_alignEnd="@+id/IngrediëntInput"
-        android:checked="false" />
 </RelativeLayout>

@@ -16,7 +16,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class selected_recipe extends AppCompatActivity {
+public class AddRecipe extends AppCompatActivity {
 
     DatabaseHelper myDB;
 
@@ -32,7 +32,7 @@ public class selected_recipe extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_selected_recipe);
+        setContentView(R.layout.activity_add_recipe);
 
         idView = (TextView) findViewById(R.id.RecipeName);
         recipeLine = (EditText) findViewById(R.id.addRecipe);
@@ -78,30 +78,6 @@ public class selected_recipe extends AppCompatActivity {
         ingLine.setText("");
 
 
-    }
-
-
-    public void searchRecipe(View view){
-        Cursor search = myDB.searchRecipe();
-        if (search.getCount() == 0) {
-            Log.d("geen data", "geen data");
-        } else
-            Log.d("wel data", "wel data");
-        //findLine.setText("");
-        StringBuffer buffer = new StringBuffer();
-        while(search.moveToNext()){
-            buffer.append("ID: "+search.getString(0)+"\n");
-            buffer.append("Name: "+search.getString(1)+"\n");
-        }
-        show("data", buffer.toString());
-    }
-
-    public void show(String title, String message){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setCancelable(true);
-        builder.setTitle(title);
-        builder.setMessage(message);
-        builder.show();
     }
 
 }
