@@ -23,7 +23,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Mensen/groepen toevoegen"
+        android:text="Recepten toevoegen"
         android:id="@+id/button"
         android:layout_marginBottom="44dp"
         android:layout_above="@+id/button4"
@@ -33,13 +33,12 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Mensen/groepen aanpassen"
+        android:text="Mensen toevoegen"
         android:id="@+id/button4"
+        android:layout_marginBottom="55dp"
+        android:onClick="ChangePeople"
         android:layout_alignParentBottom="true"
-        android:layout_alignLeft="@+id/button"
-        android:layout_alignStart="@+id/button"
-        android:layout_marginBottom="58dp"
-        android:onClick="ChangePeople"/>
+        android:layout_centerHorizontal="true" />
 
     <TextView
         android:layout_width="wrap_content"

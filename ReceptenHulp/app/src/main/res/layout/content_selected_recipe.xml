@@ -18,7 +18,8 @@
         android:id="@+id/Return"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:onClick="back" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -35,42 +36,51 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/addRecipe"
+        android:layout_marginTop="35dp"
         android:layout_below="@+id/RecipeName"
-        android:layout_marginTop="89dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:hint="vul de naam van het recept in"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Voeg recept toe"
+        android:id="@+id/add"
+        android:onClick="addRecipe"
+        android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="add"
-        android:id="@+id/add"
-        android:layout_below="@+id/addRecipe"
-        android:layout_alignLeft="@+id/addRecipe"
-        android:layout_alignStart="@+id/addRecipe"
-        android:layout_marginTop="29dp"
-        android:onClick="addRecipe"/>
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="search"
-        android:id="@+id/search"
-        android:onClick="lookupRecipe"
-        android:layout_below="@+id/searchRecipe"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:text="ingredient toevoegen"
+        android:id="@+id/adding"
+        android:onClick="addings"
+        android:layout_above="@+id/Return"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/searchRecipe"
-        android:layout_centerVertical="true"
+        android:layout_above="@+id/Return"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_toLeftOf="@+id/adding"
+        android:layout_toStartOf="@+id/adding" />
+
+    <ListView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ingredients"
+        android:layout_below="@+id/addRecipe"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_above="@+id/adding" />
 
 </RelativeLayout>

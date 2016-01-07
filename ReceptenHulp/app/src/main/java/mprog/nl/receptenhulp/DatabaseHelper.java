@@ -2,6 +2,7 @@ package mprog.nl.receptenhulp;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
@@ -10,11 +11,21 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 public class DatabaseHelper extends SQLiteOpenHelper {
 
+    public class Recipe {
+        // Labels table name
+        public static final String TABLE = "recipes_table";
+
+        // Labels Table Columns names
+        public static final String ID = "id";
+        public static final String RcpName = "RcpName";
+        public static final String INGS = "INGS";
+
+        // property help us to keep data
+        public int RCP_ID;
+        public String name;
+    }
+
     public static final String DATABASE_NAME = "Recipes.db";
-    public static final String TABLE_NAME = "recipes_table";
-    public static final String ID = "ID";
-    public static final String COLUMN1 = "RECIPE";
-    //public static final String INGREDIËNTS = "ingrediënts";
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, 1);
@@ -22,24 +33,35 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table " + TABLE_NAME +" (ID INTEGER PRIMARY KEY AUTOINCREMENT,RECIPE TEXT)");
+        String CREATE_TABLE_RECIPES = "CREATE TABLE " + Recipe.TABLE  + "("
+                + Recipe.ID  + " INTEGER PRIMARY KEY AUTOINCREMENT , "
+                + Recipe.RcpName + " TEXT ,"
+                + Recipe.INGS + " TEXT )";
+        db.execSQL(CREATE_TABLE_RECIPES);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS "+TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS "+Recipe.TABLE);
         onCreate(db);
     }
 
-    public boolean addRecipe (String recipeName){
+    public boolean addRecipe (String recipeName, String ings){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(COLUMN1,recipeName);
-        long result = db.insert(TABLE_NAME,null,contentValues);
+        contentValues.put(Recipe.RcpName, recipeName);
+        contentValues.put(Recipe.INGS, ings);
+        long result = db.insert(Recipe.TABLE,null,contentValues);
         if (result == -1){
             return false;
         }
         else
             return true;
+    }
+
+    public Cursor searchRecipe (){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor search = db.rawQuery("SELECT * FROM "+ Recipe.TABLE,null);
+        return search;
     }
 }
