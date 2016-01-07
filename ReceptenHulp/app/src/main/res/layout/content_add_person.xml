@@ -18,7 +18,8 @@
         android:id="@+id/Return"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:onClick="Return"/>
 
     <Button
         android:layout_width="wrap_content"
@@ -27,7 +28,8 @@
         android:id="@+id/AddPerson"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentEnd="true"
+        android:onClick="addPerson"/>
 
     <EditText
         android:layout_width="wrap_content"
@@ -35,7 +37,7 @@
         android:inputType="textPersonName"
         android:text="Voornaam"
         android:ems="10"
-        android:id="@+id/FirstName"
+        android:id="@+id/firstName"
         android:layout_marginTop="33dp"
         android:layout_below="@+id/Info"
         android:layout_alignParentLeft="true"
@@ -49,8 +51,8 @@
         android:inputType="textPersonName"
         android:text="Tussenvoegsel"
         android:ems="10"
-        android:id="@+id/Prefix"
-        android:layout_below="@+id/FirstName"
+        android:id="@+id/adj"
+        android:layout_below="@+id/firstName"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="26dp" />
@@ -61,8 +63,8 @@
         android:inputType="textPersonName"
         android:text="Achternaam"
         android:ems="10"
-        android:id="@+id/LastName"
-        android:layout_below="@+id/Prefix"
+        android:id="@+id/lastName"
+        android:layout_below="@+id/adj"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="27dp"
@@ -83,10 +85,29 @@
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/listView"
-        android:layout_below="@+id/LastName"
+        android:id="@+id/allergies"
+        android:layout_below="@+id/lastName"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_above="@+id/Return" />
+        android:layout_above="@+id/allergie" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="voeg allergie toe"
+        android:id="@+id/allergie"
+        android:layout_above="@+id/AddPerson"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/allergieInput"
+        android:layout_above="@+id/Return"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_toLeftOf="@+id/AddPerson"
+        android:layout_toStartOf="@+id/AddPerson" />
 
 </RelativeLayout>
