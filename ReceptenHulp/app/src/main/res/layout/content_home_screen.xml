@@ -36,7 +36,7 @@
         android:text="Mensen toevoegen"
         android:id="@+id/button4"
         android:layout_marginBottom="55dp"
-        android:onClick="ChangePeople"
+        android:onClick="addPeople"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 

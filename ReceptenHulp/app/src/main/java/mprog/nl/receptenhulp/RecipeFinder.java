@@ -29,12 +29,18 @@ public class RecipeFinder extends AppCompatActivity {
     Button add;
     Button search;
 
+    //
+    EditText tests;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_finder);
 
         ingsIn = (EditText) findViewById(R.id.ingsIn);
+
+        //
+        tests = (EditText) findViewById(R.id.test);
 
         add = (Button) findViewById(R.id.add);
         search = (Button) findViewById(R.id.search);
@@ -67,7 +73,26 @@ public class RecipeFinder extends AppCompatActivity {
     }
 
     public void searchRecipe(View view){
+
         Cursor search = myDB.searchRecipe();
+        if (search.getCount() == 0) {
+            Log.d("geen data", "geen data");
+        } else
+            Log.d("wel data", "wel data");
+        //findLine.setText("");
+        StringBuffer buffer = new StringBuffer();
+        while(search.moveToNext()){
+            buffer.append("ID: "+search.getString(0)+"\n");
+            buffer.append("Name: "+search.getString(1)+"\n");
+            buffer.append("Ings: "+search.getString(2)+"\n");
+        }
+        show("data", buffer.toString());
+    }
+
+    //Test om recepten op naam te vinden
+    public void test(View view){
+        String[] test = {tests.getText().toString()};
+        Cursor search = myDB.getRecipe(test);
         if (search.getCount() == 0) {
             Log.d("geen data", "geen data");
         } else

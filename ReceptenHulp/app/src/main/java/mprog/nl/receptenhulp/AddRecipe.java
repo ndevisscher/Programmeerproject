@@ -19,6 +19,7 @@ import java.util.Arrays;
 public class AddRecipe extends AppCompatActivity {
 
     DatabaseHelper myDB;
+    IngredientHelper myING;
 
     private ArrayList<String> ingredients;
     private ArrayAdapter<String> adapter;
@@ -48,22 +49,39 @@ public class AddRecipe extends AppCompatActivity {
         ings.setAdapter(adapter);
 
         myDB = new DatabaseHelper(this);
+        myING = new IngredientHelper(this);
     }
 
 
     public void addRecipe(View view) {
 
-        String ings = "";
-        for (String collect : ingredients){
-            ings = ings  + collect + " , ";
+        int ID = 0;
+        String recipeName = recipeLine.getText().toString();
+        String[] test = {recipeName};
+        myDB.addRecipe(recipeName);
+
+        //Cursor get = myDB.getRecipe(test);
+        //ID = Integer.parseInt(get.getString(0));
+
+        for (String ing : ingredients) {
+            myING.addIngredients(ing, recipeName);
         }
 
-        boolean check = myDB.addRecipe(recipeLine.getText().toString(),ings);
-        if (check == true) {
-            Log.d("check", "het is gelukt");
-        } else
-            Log.d("fail", "het is niet gelukt");
+        //addIngredients(recipeName);
         recipeLine.setText("");
+    }
+
+    public void addIngredients (String rcpName){
+
+        int ID = 0;
+
+        String[] test = {rcpName};
+        Cursor get = myDB.getRecipe(test);
+        ID = Integer.parseInt(get.getString(0));
+
+        for (String ing : ingredients) {
+            myING.addIngredients(ing, rcpName);
+        }
     }
 
     public void back (View view){

@@ -46,11 +46,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean addRecipe (String recipeName, String ings){
+    public boolean addRecipe (String recipeName){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(Recipe.RcpName, recipeName);
-        contentValues.put(Recipe.INGS, ings);
+        //contentValues.put(Recipe.INGS, ings);
         long result = db.insert(Recipe.TABLE,null,contentValues);
         if (result == -1){
             return false;
@@ -62,6 +62,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public Cursor searchRecipe (){
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor search = db.rawQuery("SELECT * FROM "+ Recipe.TABLE,null);
+        return search;
+    }
+
+    public Cursor getRecipeId (String[] rcpName){
+        SQLiteDatabase db = this.getReadableDatabase();
+        String SelectQ = "SELECT * FROM "+ Recipe.TABLE + " WHERE " + Recipe.RcpName + "=?";
+        Cursor search = db.rawQuery(SelectQ,rcpName);
+        return search;
+    }
+
+    public Cursor getRecipe (String[] Ings){
+        SQLiteDatabase db = this.getReadableDatabase();
+        String SelectQ = "SELECT * FROM "+ Recipe.TABLE + " WHERE " + Recipe.RcpName + "=?";
+        Cursor search = db.rawQuery(SelectQ,Ings);
         return search;
     }
 }
