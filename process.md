@@ -11,3 +11,4 @@ http://instinctcoder.com/android-studio-sqlite-database-example/ <br>
 Vond een probleem met de emulator cache, waardoor ik dacht dat de database niet werkte, is nu opgelost.
 
 #day 4:
+Een verandering gemaakt in de layout en indeling. keuze gemaakt om recepten te kunnen toevoegen aan de app. verder een begin gemaakt aan de zoekfunctie, je kunt nu ingredienten aan een lijst toevoegen die gezocht moeten worden in de recepten.
