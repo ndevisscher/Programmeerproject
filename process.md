@@ -17,3 +17,8 @@ Vond een probleem met de emulator cache, waardoor ik dacht dat de database niet 
 - Recepten kunnen nu op naam gezocht worden uit de lijst.
 - Een extra database aangemaakt voor mensen met hun allergien.
 - Mensen kunnen worden toegevoegd aan een database met de allergien die ze hebben.
+
+#day 5:
+- Gewerkt aan het optimaliseren van de databse en de bijbehorende tabellen, alles staat nu in 1 database.
+- Design document gemaakt
+- kleine aanpassingen gemaakt de layout van de app activities, enkele schermen hebben nu nog testknoppen die later verwijdert moeten worden.
