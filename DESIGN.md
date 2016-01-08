@@ -1,5 +1,12 @@
 #Design document voor Receptenhulp
 
+##MVP:
+In de app moet minimaal het volgende mogelijk zijn:
+- Het toevoegen van recepten met de bijbehorende ingrediënten
+- Het toevoegen van mensen met de allergiën die ze hebben
+- Het kunnen zoeken naar recepten aan de hand van ingrediënten die je wilt gebruiken
+- Mensen kunnen toevoegen aan het zoeken naar recepten en de resultaten aanpassen aan de hand van hun allergiën
+
 ##Advanced sketches:
 
 #####Home scherm:
