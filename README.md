@@ -8,10 +8,11 @@ Niek de Visscher (10667474)
 De app zal een hulpmiddel zijn om recepten te vinden gegeven ingredienten. Hierdoor kunnen mensen op ideeen komen die ze anders mogelijk niet zouden hebben. Verder kan er worden aangegeven wie mee-eten, individuele mensen of een groep mensen, en voor deze kunnen worden aangegeven wat allergiën zijn om de recepten te verfijnen/uit te sluiten.
 
 ### Features: ###
+* Toevoegen van recepten aan de database
 * Vinden van recepten/maaltijden gegeven 1 of meerdere ingrediënten
-* Recept/maaltijd selecteren en de ingrediënten en bereidingswijze zien
+* Recept/maaltijd selecteren en de ingrediënten zien
 * Het invoeren van namen van mensen en hun allergiën
-* Mensen kunnen toevoegen aan groepen
+* (Mensen kunnen toevoegen aan groepen)
 * Groepen/mensen kunnen worden geselecteerd bij het zoeken naar recepten
 
 ### Data sets: ###
@@ -20,7 +21,7 @@ De app zal een hulpmiddel zijn om recepten te vinden gegeven ingredienten. Hierd
 
 ### Probleemverdeling: ###
 * Een lijst van verschillende maaltijden moet in de app staan
-* Selecteren van een maaltijd toont de ingrediënten en bereidingswijze
+* Selecteren van een maaltijd toont de ingrediënten
 * Ingrediënten van een maaltijd moeten kunnen worden opgezocht
 * Registratie van mensen met hun allergiën
 * Zoekfunctie moet de allergiën van geselecteerde mensen meenemen 
