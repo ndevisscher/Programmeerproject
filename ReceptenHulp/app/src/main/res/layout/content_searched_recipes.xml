@@ -31,12 +31,12 @@
         android:layout_alignParentEnd="true"
         android:layout_toRightOf="@+id/Home"
         android:layout_toEndOf="@+id/Home"
-        android:onClick="FindRecipe"/>
+        android:onClick="newSearch"/>
 
     <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/listView3"
+        android:id="@+id/recipeList"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"

@@ -60,10 +60,10 @@ public class RecipeFinder extends AppCompatActivity {
         startActivity(intent);
     }
 
-//    public void Search (View view) {
-//        Intent intent = new Intent(this, SearchedRecipes.class);
-//        startActivity(intent);
-//    }
+    public void Search (View view) {
+        Intent intent = new Intent(this, SearchedRecipes.class);
+        startActivity(intent);
+    }
 
     public void addings (View view){
         String testitem = ingsIn.getText().toString();
