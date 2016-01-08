@@ -2,9 +2,12 @@
 
 ##Advanced sketches:
 
-![alt text](https://github.com/ndevisscher/Programmeerproject/blob/master/doc/PersoonInvoer.png "1")
-![alt text](https://github.com/ndevisscher/Programmeerproject/blob/master/doc/receptInvoer.png "1")
+#####Recept zoeken:
 ![alt text](https://github.com/ndevisscher/Programmeerproject/blob/master/doc/ZoekRecept.png "1")
+#####Receptinvoer:
+![alt text](https://github.com/ndevisscher/Programmeerproject/blob/master/doc/receptInvoer.png "1")
+#####Persooninvoer:
+![alt text](https://github.com/ndevisscher/Programmeerproject/blob/master/doc/PersoonInvoer.png "1")
 
 ##Classes and Methods:
 Er worden verschillende classes gebruikt in de app die helpen bij het maken en onderhouden van de database en de tabellen die gebruikt worden. Verder gebruik ik de normale classes voor de verschilllende activities.
