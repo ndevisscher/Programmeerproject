@@ -7,17 +7,6 @@ In de app moet minimaal het volgende mogelijk zijn:
 - Het kunnen zoeken naar recepten aan de hand van ingrediënten die je wilt gebruiken
 - Mensen kunnen toevoegen aan het zoeken naar recepten en de resultaten aanpassen aan de hand van hun allergiën
 
-##Advanced sketches:
-
-#####Home scherm:
-![alt text](https://github.com/ndevisscher/Programmeerproject/blob/master/doc/Home.png "1")
-#####Recept zoeken:
-![alt text](https://github.com/ndevisscher/Programmeerproject/blob/master/doc/ZoekRecept.png "1")
-#####Receptinvoer:
-![alt text](https://github.com/ndevisscher/Programmeerproject/blob/master/doc/receptInvoer.png "1")
-#####Persooninvoer:
-![alt text](https://github.com/ndevisscher/Programmeerproject/blob/master/doc/PersoonInvoer.png "1")
-
 ##Classes and Methods:
 Er worden verschillende classes gebruikt in de app die helpen bij het maken en onderhouden van de database en de tabellen die gebruikt worden. Verder gebruik ik de normale classes voor de verschilllende activities.
 #####Belangrijke Classes en Methods:
@@ -34,4 +23,15 @@ Ik maak gebruik van een aantal tabellen in een database die met elkaar in verbin
 
 ####Databasestructuur:
 ![alt text](https://github.com/ndevisscher/Programmeerproject/blob/master/doc/DatabaseStructuur.png "1")
+
+##Advanced sketches:
+
+#####Home scherm:
+![alt text](https://github.com/ndevisscher/Programmeerproject/blob/master/doc/Home.png "1")
+#####Recept zoeken:
+![alt text](https://github.com/ndevisscher/Programmeerproject/blob/master/doc/ZoekRecept.png "1")
+#####Receptinvoer:
+![alt text](https://github.com/ndevisscher/Programmeerproject/blob/master/doc/receptInvoer.png "1")
+#####Persooninvoer:
+![alt text](https://github.com/ndevisscher/Programmeerproject/blob/master/doc/PersoonInvoer.png "1")
 
