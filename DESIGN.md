@@ -9,4 +9,6 @@ Er worden verschillende classes gebruikt in de app die helpen bij het maken en o
 
 ##Datasources and Databases:
 Ik maak gebruik van een aantal databases die met elkaar in verbinding staan. Zo sla ik de ingredienten van recepten en allergien van mensen op in apparte databases, om ervoor te zorgen dat de informatie makkelijker op te halen is met SQlite. Het was ook mogelijk geweest om deze informatie in 1 database op te slaan, maar dit zou het veel omslachtiger maken om informatie te vinden. <br>
-###Databasestructuur:
+####Databasestructuur:
+
+
