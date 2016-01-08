@@ -2,6 +2,8 @@
 
 ##Advanced sketches:
 
+#####Home scherm:
+![alt text](https://github.com/ndevisscher/Programmeerproject/blob/master/doc/Home.png "1")
 #####Recept zoeken:
 ![alt text](https://github.com/ndevisscher/Programmeerproject/blob/master/doc/ZoekRecept.png "1")
 #####Receptinvoer:
