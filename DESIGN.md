@@ -13,6 +13,10 @@
 
 ##Classes and Methods:
 Er worden verschillende classes gebruikt in de app die helpen bij het maken en onderhouden van de database en de tabellen die gebruikt worden. Verder gebruik ik de normale classes voor de verschilllende activities.
+* Belangrijke Classes:
+- DatabaseHelper
+- Activity classes
+Belangrijke methods staan in de databasehelper, deze zijn vooral gericht op het toevoegen van info aan de database en het ophalen van items uit de database.
 
 ##API's and Frameworks:
 
