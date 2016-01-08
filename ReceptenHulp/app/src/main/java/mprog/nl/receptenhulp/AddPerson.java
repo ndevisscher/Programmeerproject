@@ -17,11 +17,12 @@ import java.util.Arrays;
 
 public class AddPerson extends AppCompatActivity {
 
-    PeopleHelper myPeople;
+    DatabaseHelper myDB;
 
     EditText FirstName;
     EditText Adj;
     EditText LastName;
+    EditText allergLine;
 
     Button back;
     Button add;
@@ -37,6 +38,7 @@ public class AddPerson extends AppCompatActivity {
         FirstName = (EditText) findViewById(R.id.firstName);
         Adj = (EditText) findViewById(R.id.adj);
         LastName = (EditText) findViewById(R.id.lastName);
+        allergLine = (EditText) findViewById(R.id.allergieInput);
 
         ListView allergs = (ListView)findViewById(R.id.allergies);
         String[] items = {"kip"};
@@ -44,12 +46,15 @@ public class AddPerson extends AppCompatActivity {
         adapter = new ArrayAdapter<String>(this,R.layout.list_item,R.id.ing,ingredients);
         allergs.setAdapter(adapter);
 
-        myPeople = new PeopleHelper(this);
+        myDB = new DatabaseHelper(this);
 
     }
 
     public void addAllergie (View view){
-
+        String testitem = allergLine.getText().toString();
+        ingredients.add(testitem);
+        adapter.notifyDataSetChanged();
+        allergLine.setText("");
     }
 
     public void addPerson(View view) {
@@ -60,7 +65,7 @@ public class AddPerson extends AppCompatActivity {
         String allergies = "";
 
         for (String ing : ingredients) {
-            myPeople.addPerson(firstName, adj, lastName, allergies);
+            myDB.addPerson(firstName, adj, lastName, allergies);
         }
 
         //addIngredients(recipeName);
@@ -71,19 +76,21 @@ public class AddPerson extends AppCompatActivity {
 
     public void showPeople(View view){
 
-//        Cursor search = myPeople.showPeople();
-//        if (search.getCount() == 0) {
-//            Log.d("geen data", "geen data");
-//        } else
-//            Log.d("wel data", "wel data");
-//        //findLine.setText("");
-//        StringBuffer buffer = new StringBuffer();
-//        while(search.moveToNext()){
-//            buffer.append("ID: "+search.getString(0)+"\n");
-//            buffer.append("Name: "+search.getString(1)+"\n");
-//            buffer.append("Ings: "+search.getString(2)+"\n");
-//        }
-//        show("data", buffer.toString());
+        Cursor search = myDB.showPeople();
+        if (search.getCount() == 0) {
+            Log.d("geen data", "geen data");
+        } else
+            Log.d("wel data", "wel data");
+        //findLine.setText("");
+        StringBuffer buffer = new StringBuffer();
+        while(search.moveToNext()){
+            buffer.append("ID: "+search.getString(0)+"\n");
+            buffer.append("Name: "+search.getString(1)+"\n");
+            buffer.append("ADJ: "+search.getString(2)+"\n");
+            buffer.append("LastName: "+search.getString(3)+"\n");
+            buffer.append("Allergies: "+search.getString(4)+"\n");
+        }
+        show("data", buffer.toString());
     }
 
     public void show(String title, String message){

@@ -19,7 +19,6 @@ import java.util.Arrays;
 public class AddRecipe extends AppCompatActivity {
 
     DatabaseHelper myDB;
-    IngredientHelper myING;
 
     private ArrayList<String> ingredients;
     private ArrayAdapter<String> adapter;
@@ -43,13 +42,12 @@ public class AddRecipe extends AppCompatActivity {
         search = (Button) findViewById(R.id.adding);
         ListView ings = (ListView)findViewById(R.id.ingredients);
 
-        String[] items = {"soufle","goulash","kip teriyaki"};
+        String[] items = {"rijst","wortelen","kip"};
         ingredients = new ArrayList<>(Arrays.asList(items));
         adapter = new ArrayAdapter<String>(this,R.layout.list_item,R.id.ing,ingredients);
         ings.setAdapter(adapter);
 
         myDB = new DatabaseHelper(this);
-        myING = new IngredientHelper(this);
     }
 
 
@@ -64,10 +62,10 @@ public class AddRecipe extends AppCompatActivity {
         //ID = Integer.parseInt(get.getString(0));
 
         for (String ing : ingredients) {
-            myING.addIngredients(ing, recipeName);
+            myDB.addIngredients(ing, recipeName);
         }
 
-        //addIngredients(recipeName);
+        addIngredients(recipeName);
         recipeLine.setText("");
     }
 
@@ -77,10 +75,10 @@ public class AddRecipe extends AppCompatActivity {
 
         String[] test = {rcpName};
         Cursor get = myDB.getRecipe(test);
-        ID = Integer.parseInt(get.getString(0));
+        //ID = Integer.parseInt(get.getString(0));
 
         for (String ing : ingredients) {
-            myING.addIngredients(ing, rcpName);
+            myDB.addIngredients(ing, rcpName);
         }
     }
 
@@ -94,8 +92,6 @@ public class AddRecipe extends AppCompatActivity {
         ingredients.add(testitem);
         adapter.notifyDataSetChanged();
         ingLine.setText("");
-
-
     }
 
 }
