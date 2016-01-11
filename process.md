@@ -22,3 +22,11 @@ Vond een probleem met de emulator cache, waardoor ik dacht dat de database niet 
 - Gewerkt aan het optimaliseren van de databse en de bijbehorende tabellen, alles staat nu in 1 database.
 - Design document gemaakt
 - kleine aanpassingen gemaakt de layout van de app activities, enkele schermen hebben nu nog testknoppen die later verwijdert moeten worden.
+
+#day 6:
+- Zoekfunctie volledig geimplementeerd.
+- verandering gemaakt in de opslag van ingredienten, ze worden nu als lange string opgeslagen en alfabetisch gesorteerd, hierdoor kan ik makkelijker de database doorzoeken.
+- Zoekresultaten van de zoekfunctie worden nu op de goede activity getoond en kunnen worden aangeklikt om meer informatie te laten zien.
+- Comments toegevoegd aan de meeste java documente om de code overzichtelijker te maken.
+- Toevoegen van bereidingswijze is mogelijk als een recept wordt toegevoegd.
+- Navigeren tussen activities aangepast door de back knop nu in de toolbar te zetten.
