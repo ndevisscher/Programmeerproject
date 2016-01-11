@@ -108,6 +108,8 @@ public class RecipeFinder extends AppCompatActivity {
         Cursor search = myDB.searchOnIngredient(check);
         if (search.getCount() == 0) {
             Log.d("geen data", "geen data");
+            show("probeer het nogmaals","er zijn geen resultaten gevonden voor de zoekopdracht");
+            return;
         } else
             Log.d("wel data", "wel data");
 
