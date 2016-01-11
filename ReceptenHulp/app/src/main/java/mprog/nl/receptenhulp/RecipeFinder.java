@@ -29,6 +29,7 @@ public class RecipeFinder extends AppCompatActivity {
 
     private ArrayList<String> ingredients;
     private ArrayAdapter<String> adapter;
+    ArrayList<String> recipes;
 
     EditText ingsIn;
     Button add;
@@ -93,22 +94,31 @@ public class RecipeFinder extends AppCompatActivity {
         ingsIn.setText("");
     }
 
-
+    //Searching for the recipes and passing the data to the next activity
     public void searchRecipe(View view){
 
-        Cursor search = myDB.searchRecipe();
+        recipes = new ArrayList<>();
+        String extra ="";
+        Collections.sort(ingredients);
+        for (String ing: ingredients){
+            extra = extra + "%"+ing+"%";
+        }
+        String[] check = {extra};
+
+        Cursor search = myDB.searchOnIngredient(check);
         if (search.getCount() == 0) {
             Log.d("geen data", "geen data");
         } else
             Log.d("wel data", "wel data");
-        //findLine.setText("");
-        StringBuffer buffer = new StringBuffer();
+
         while(search.moveToNext()){
-            buffer.append("ID: "+search.getString(0)+"\n");
-            buffer.append("Name: "+search.getString(1)+"\n");
-            buffer.append("Ings: "+search.getString(2) + "\n");
+            recipes.add(search.getString(1));
         }
-        show("data", buffer.toString());
+
+        Intent intent = new Intent(this,SearchedRecipes.class);
+        intent.putStringArrayListExtra("searchResults",recipes);
+        startActivity(intent);
+
     }
 
     //Test om recepten op ingredient te vinden

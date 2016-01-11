@@ -27,6 +27,7 @@ public class SearchedRecipes extends AppCompatActivity {
 
     private ArrayList<String> testie;
 
+    ArrayList<String> recipes;
     private ArrayList<String> ingredients;
     private ArrayAdapter<String> adapter;
 
@@ -39,6 +40,10 @@ public class SearchedRecipes extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_searched_recipes);
 
+        //Getting the search results from our previous activity
+        Intent get = getIntent();
+        recipes = get.getStringArrayListExtra("searchResults");
+
         back = (Button) findViewById(R.id.Home);
         newSearch = (Button) findViewById(R.id.NewSearch);
 
@@ -47,9 +52,10 @@ public class SearchedRecipes extends AppCompatActivity {
 
         //Creating the listview with data, so we can select a recipe
         ListView List = (ListView)findViewById(R.id.recipeList);
-        String[] items = {"yuk","kip teriyaki","Goulash","Mosselen"};
-        ingredients = new ArrayList<>(Arrays.asList(items));
-        adapter = new ArrayAdapter<String>(this,R.layout.output_layout,R.id.recipes,ingredients);
+
+        //String[] items = {"yuk","kip teriyaki","Goulash","Mosselen"};
+        //ingredients = new ArrayList<>(Arrays.asList(items));
+        adapter = new ArrayAdapter<String>(this,R.layout.output_layout,R.id.recipes,recipes);
         List.setAdapter(adapter);
         List.setOnItemClickListener(new itemClick());
 
