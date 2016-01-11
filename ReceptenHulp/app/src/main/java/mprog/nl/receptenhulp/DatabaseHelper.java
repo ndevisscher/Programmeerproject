@@ -19,7 +19,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         // Labels Table Columns names
         public static final String ID = "id";
         public static final String RcpName = "RcpName";
-        public static final String INGS = "INGS";
+        public static final String Descript = "Descript";
+        public static final String INGS = "Ings";
     }
 
     //Info for the ingredients table
@@ -58,6 +59,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     String CREATE_TABLE_RECIPES = "CREATE TABLE " + Recipe.TABLE  + "("
             + Recipe.ID  + " INTEGER PRIMARY KEY AUTOINCREMENT , "
             + Recipe.RcpName + " TEXT ,"
+            + Recipe.Descript + " TEXT,"
             + Recipe.INGS + " TEXT )";
 
     //Ingredient table SQL
@@ -92,17 +94,27 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     //Adding a recipe to the recipe_table
-    public boolean addRecipe (String recipeName){
+    public boolean addRecipe (String recipeName, String descript, String ings){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put(Recipe.RcpName, recipeName);
-        //contentValues.put(Recipe.INGS, ings);
+        contentValues.put(Recipe.Descript, descript);
+        contentValues.put(Recipe.INGS, ings);
+
         long result = db.insert(Recipe.TABLE,null,contentValues);
         if (result == -1){
             return false;
         }
         else
             return true;
+    }
+
+    //Search for recipes given an ingredient
+    public Cursor searchOnIngredient (String[] ingredient){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String searchQ = "SELECT * FROM "+ Recipe.TABLE + " WHERE " + Recipe.INGS + " LIKE ?";
+        Cursor search = db.rawQuery(searchQ,ingredient);
+        return search;
     }
 
     //Getting all recipes from the recipe_table
@@ -113,7 +125,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     //Getting a recipe from the recipe_table based of RcpName
-    public Cursor getRecipeId (String[] rcpName){
+    public Cursor getRecipeInfo (String[] rcpName){
         SQLiteDatabase db = this.getReadableDatabase();
         String SelectQ = "SELECT * FROM "+ Recipe.TABLE + " WHERE " + Recipe.RcpName + "=?";
         Cursor search = db.rawQuery(SelectQ,rcpName);

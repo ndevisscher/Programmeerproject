@@ -1,11 +1,14 @@
 package mprog.nl.receptenhulp;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -15,6 +18,7 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 public class AddRecipe extends AppCompatActivity {
 
@@ -29,6 +33,9 @@ public class AddRecipe extends AppCompatActivity {
     Button add;
     Button search;
 
+    String descript = "";
+    String ings = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,33 +49,48 @@ public class AddRecipe extends AppCompatActivity {
         search = (Button) findViewById(R.id.adding);
         ListView ings = (ListView)findViewById(R.id.ingredients);
 
-        String[] items = {"rijst","wortelen","kip"};
+        String[] items = {};
         ingredients = new ArrayList<>(Arrays.asList(items));
         adapter = new ArrayAdapter<String>(this,R.layout.list_item,R.id.ing,ingredients);
         ings.setAdapter(adapter);
 
         myDB = new DatabaseHelper(this);
+
+        Toolbar object = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(object);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home)
+        {
+            onBackPressed();
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
+    //Adding the recipe to the database
     public void addRecipe(View view) {
 
         int ID = 0;
         String recipeName = recipeLine.getText().toString();
         String[] test = {recipeName};
-        myDB.addRecipe(recipeName);
 
-        //Cursor get = myDB.getRecipe(test);
-        //ID = Integer.parseInt(get.getString(0));
-
+        Collections.sort(ingredients);
         for (String ing : ingredients) {
-            myDB.addIngredients(ing, recipeName);
+            ings = ings + " " + ing;
         }
+
+        myDB.addRecipe(recipeName,descript,ings);
 
         addIngredients(recipeName);
         recipeLine.setText("");
+        ingredients.clear();
+        ings = "";
     }
 
+    //Adding the ingredients to the database
     public void addIngredients (String rcpName){
 
         int ID = 0;
@@ -82,17 +104,41 @@ public class AddRecipe extends AppCompatActivity {
         }
     }
 
-    public void back (View view){
-        Intent intent = new Intent(this, HomeScreen.class);
-        startActivity(intent);
-    }
-
+    //Adding ingredients to the list to add to the recipe
     public void addings (View view){
         String testitem = ingLine.getText().toString();
         ingredients.add(testitem);
         adapter.notifyDataSetChanged();
         ingLine.setText("");
     }
+
+    //A popup so you can add the description for the recipe
+    private void descriptInput() {
+
+        AlertDialog.Builder descriptBuilder = new AlertDialog.Builder(this);
+        descriptBuilder.setTitle("bereidingswijze");
+        descriptBuilder.setMessage("Voer hier de bereidingswijze van het recept in.");
+        final EditText descInput = new EditText(this);
+        descInput.setSingleLine();
+        descInput.setText("");
+        descriptBuilder.setView(descInput);
+        descriptBuilder.setPositiveButton("Ok",
+                new DialogInterface.OnClickListener() {
+
+                    public void onClick(DialogInterface dialog, int which) {
+                        descript = descInput.getText().toString();
+                    }
+                });
+
+        AlertDialog descript = descriptBuilder.create();
+        descript.show();
+    }
+
+    //Actually dispalying the popup for the description
+    public void showDescriptInput (View view){
+        descriptInput();
+    }
+
 
 }
 

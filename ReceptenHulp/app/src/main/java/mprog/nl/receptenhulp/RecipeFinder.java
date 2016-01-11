@@ -6,7 +6,9 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -16,6 +18,7 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class RecipeFinder extends AppCompatActivity {
@@ -44,33 +47,47 @@ public class RecipeFinder extends AppCompatActivity {
 
         add = (Button) findViewById(R.id.add);
         search = (Button) findViewById(R.id.search);
-        ListView ings = (ListView)findViewById(R.id.ingsList);
 
-        String[] items = {"kip"};
+        //Setting up the ingredient listview to use for our search
+        ListView ings = (ListView)findViewById(R.id.ingsList);
+        String[] items = {};
         ingredients = new ArrayList<>(Arrays.asList(items));
         adapter = new ArrayAdapter<String>(this,R.layout.list_item,R.id.ing,ingredients);
         ings.setAdapter(adapter);
 
+        //Initializing the database for this activity
         myDB = new DatabaseHelper(this);
 
+
+        Toolbar object = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(object);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
     }
 
-    public void ReturnHome (View view) {
-        Intent intent = new Intent(this, HomeScreen.class);
-        startActivity(intent);
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home)
+        {
+            onBackPressed();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
+    //Searching for the wanted recipe giving the search criteria
     public void Search (View view) {
         Intent intent = new Intent(this, SearchedRecipes.class);
         startActivity(intent);
     }
 
+    //Adding an ingredient to our search
     public void addings (View view){
         String testitem = ingsIn.getText().toString();
         ingredients.add(testitem);
         adapter.notifyDataSetChanged();
         ingsIn.setText("");
     }
+
 
     public void searchRecipe(View view){
 
@@ -89,22 +106,31 @@ public class RecipeFinder extends AppCompatActivity {
         show("data", buffer.toString());
     }
 
-    //Test om recepten op naam te vinden
+    //Test om recepten op ingredient te vinden
     public void test(View view){
-        String[] test = {tests.getText().toString()};
-        Cursor search = myDB.getRecipe(test);
+        String extra ="";
+        Collections.sort(ingredients);
+        for (String ing: ingredients){
+            extra = extra + "%"+ing+"%";
+        }
+        String[] check = {extra};
+
+        //String Input = "%"+ingsIn.getText().toString()+"%";
+        //String[] test = {Input};
+        Cursor search = myDB.searchOnIngredient(check);
         if (search.getCount() == 0) {
             Log.d("geen data", "geen data");
         } else
             Log.d("wel data", "wel data");
-        //findLine.setText("");
         StringBuffer buffer = new StringBuffer();
         while(search.moveToNext()){
             buffer.append("ID: "+search.getString(0)+"\n");
             buffer.append("Name: "+search.getString(1)+"\n");
-            buffer.append("Ings: "+search.getString(2)+"\n");
+            buffer.append("Descript: "+search.getString(2)+"\n");
+            buffer.append("Ings: "+search.getString(3)+"\n");
         }
-        show("data", buffer.toString());
+        //show("data", buffer.toString());
+        show("data",buffer.toString());
     }
 
     public void show(String title, String message){
