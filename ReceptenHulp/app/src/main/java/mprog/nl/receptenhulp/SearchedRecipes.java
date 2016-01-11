@@ -23,9 +23,8 @@ import java.util.Arrays;
 
 public class SearchedRecipes extends AppCompatActivity {
 
+    //Declaring the various variables
     DatabaseHelper myDB;
-
-    private ArrayList<String> testie;
 
     ArrayList<String> recipes;
     private ArrayList<String> ingredients;
@@ -52,9 +51,6 @@ public class SearchedRecipes extends AppCompatActivity {
 
         //Creating the listview with data, so we can select a recipe
         ListView List = (ListView)findViewById(R.id.recipeList);
-
-        //String[] items = {"yuk","kip teriyaki","Goulash","Mosselen"};
-        //ingredients = new ArrayList<>(Arrays.asList(items));
         adapter = new ArrayAdapter<String>(this,R.layout.output_layout,R.id.recipes,recipes);
         List.setAdapter(adapter);
         List.setOnItemClickListener(new itemClick());
@@ -64,11 +60,9 @@ public class SearchedRecipes extends AppCompatActivity {
         setSupportActionBar(object);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-
-
     }
 
-    //Getting the name of a recipe so we can get the info for it
+    //Getting the name of a recipe by clicking the lisview so we can get the info for it
     class itemClick implements AdapterView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position,
@@ -98,6 +92,7 @@ public class SearchedRecipes extends AppCompatActivity {
         startActivity(intent);
     }
 
+    //Return to the search screen
     public void newSearch (View view) {
         Intent intent = new Intent(this, RecipeFinder.class);
         startActivity(intent);

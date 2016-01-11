@@ -22,6 +22,7 @@ import java.util.Collections;
 
 public class AddRecipe extends AppCompatActivity {
 
+    //Declaring the various variables
     DatabaseHelper myDB;
 
     private ArrayList<String> ingredients;
@@ -41,26 +42,30 @@ public class AddRecipe extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_recipe);
 
+        //Initializing the buttons and inputfields
         idView = (TextView) findViewById(R.id.RecipeName);
         recipeLine = (EditText) findViewById(R.id.addRecipe);
         ingLine = (EditText) findViewById(R.id.searchRecipe);
-
         add = (Button) findViewById(R.id.add);
         search = (Button) findViewById(R.id.adding);
-        ListView ings = (ListView)findViewById(R.id.ingredients);
 
+        //Setting up the ingredient listview to use for adding ingredients
+        ListView ings = (ListView)findViewById(R.id.ingredients);
         String[] items = {};
         ingredients = new ArrayList<>(Arrays.asList(items));
         adapter = new ArrayAdapter<String>(this,R.layout.list_item,R.id.ing,ingredients);
         ings.setAdapter(adapter);
 
+        //Initializing the database
         myDB = new DatabaseHelper(this);
 
+        //This allows us to use the back button on the toolbar
         Toolbar object = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(object);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
+    //Using the back button from the toolbar to go to the previous screen
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home)
@@ -73,21 +78,25 @@ public class AddRecipe extends AppCompatActivity {
     //Adding the recipe to the database
     public void addRecipe(View view) {
 
-        int ID = 0;
+        //Getting the name of the recipe
         String recipeName = recipeLine.getText().toString();
         String[] test = {recipeName};
 
+        //Sorting the ingredients
         Collections.sort(ingredients);
         for (String ing : ingredients) {
             ings = ings + " " + ing;
         }
 
-        myDB.addRecipe(recipeName,descript,ings);
+        //Adding the recipe to the database with the given info
+        myDB.addRecipe(recipeName, descript,ings);
 
         addIngredients(recipeName);
+        //Clearing the datafields
         recipeLine.setText("");
         ingredients.clear();
         ings = "";
+        adapter.notifyDataSetChanged();
     }
 
     //Adding the ingredients to the database

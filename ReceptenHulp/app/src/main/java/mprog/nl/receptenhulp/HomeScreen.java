@@ -19,16 +19,19 @@ public class HomeScreen extends AppCompatActivity {
 
     }
 
+    //Go to the search activity
     public void FindRecipe (View view) {
         Intent intent = new Intent(this, RecipeFinder.class);
         startActivity(intent);
     }
 
+    //Go to the recipe adding activity
     public void addRecipe (View view) {
         Intent intent = new Intent(this, AddRecipe.class);
         startActivity(intent);
     }
 
+    //Go to the people adding activity
     public void addPeople (View view) {
         Intent intent = new Intent(this, AddPerson.class);
         startActivity(intent);

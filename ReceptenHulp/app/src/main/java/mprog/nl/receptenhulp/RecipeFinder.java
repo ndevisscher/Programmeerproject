@@ -25,6 +25,7 @@ import java.util.List;
 
 public class RecipeFinder extends AppCompatActivity {
 
+    //Declaring the various variables
     DatabaseHelper myDB;
 
     private ArrayList<String> ingredients;
@@ -44,13 +45,13 @@ public class RecipeFinder extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_finder);
 
-        ingsIn = (EditText) findViewById(R.id.ingsIn);
-
         //
         tests = (EditText) findViewById(R.id.test);
 
+        //Initializing the buttons and inputfields
         add = (Button) findViewById(R.id.add);
         search = (Button) findViewById(R.id.search);
+        ingsIn = (EditText) findViewById(R.id.ingsIn);
 
         //Setting up the ingredient listview to use for our search
         ListView ings = (ListView)findViewById(R.id.ingsList);
@@ -58,19 +59,19 @@ public class RecipeFinder extends AppCompatActivity {
         ingredients = new ArrayList<>(Arrays.asList(items));
         adapter = new ArrayAdapter<String>(this,R.layout.list_item,R.id.ing,ingredients);
         ings.setAdapter(adapter);
-
         ings.setOnItemClickListener(new itemClick());
 
         //Initializing the database for this activity
         myDB = new DatabaseHelper(this);
 
-
+        //This allows us to use the back button on the toolbar
         Toolbar object = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(object);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
     }
 
+    //Using the back button from the toolbar to go to the previous screen
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home)
@@ -98,6 +99,7 @@ public class RecipeFinder extends AppCompatActivity {
     public void searchRecipe(View view){
 
         recipes = new ArrayList<>();
+        //Getting the ingredients that we are searching for in the right variables
         String extra ="";
         Collections.sort(ingredients);
         for (String ing: ingredients){
@@ -105,7 +107,9 @@ public class RecipeFinder extends AppCompatActivity {
         }
         String[] check = {extra};
 
+        //Searching the database for recipes with the given ingredients
         Cursor search = myDB.searchOnIngredient(check);
+        //End the function if no recipes are found
         if (search.getCount() == 0) {
             Log.d("geen data", "geen data");
             show("probeer het nogmaals","er zijn geen resultaten gevonden voor de zoekopdracht");
@@ -113,12 +117,14 @@ public class RecipeFinder extends AppCompatActivity {
         } else
             Log.d("wel data", "wel data");
 
+        //Adding the names of the recipes from our results to the array
         while(search.moveToNext()){
             recipes.add(search.getString(1));
         }
 
+        //Passing the names of the recipes to the new activity
         Intent intent = new Intent(this,SearchedRecipes.class);
-        intent.putStringArrayListExtra("searchResults",recipes);
+        intent.putStringArrayListExtra("searchResults", recipes);
         startActivity(intent);
 
     }
@@ -132,8 +138,6 @@ public class RecipeFinder extends AppCompatActivity {
         }
         String[] check = {extra};
 
-        //String Input = "%"+ingsIn.getText().toString()+"%";
-        //String[] test = {Input};
         Cursor search = myDB.searchOnIngredient(check);
         if (search.getCount() == 0) {
             Log.d("geen data", "geen data");
@@ -150,6 +154,7 @@ public class RecipeFinder extends AppCompatActivity {
         show("data",buffer.toString());
     }
 
+    //This will show the message when the search has no results
     public void show(String title, String message){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setCancelable(true);
@@ -158,6 +163,7 @@ public class RecipeFinder extends AppCompatActivity {
         builder.show();
     }
 
+    //Getting the index from the ingredient listView so we can delete them from our search
     public int getIndexByname(String name)
     {
         for(String ing :ingredients)
@@ -178,7 +184,6 @@ public class RecipeFinder extends AppCompatActivity {
 
             test = name.getText().toString();
             ingredients.remove(getIndexByname(test));
-            //Log.d("het recept", recipe);
             adapter.notifyDataSetChanged();
         }
     }
