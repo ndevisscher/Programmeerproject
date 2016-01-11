@@ -11,10 +11,12 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -34,6 +36,7 @@ public class RecipeFinder extends AppCompatActivity {
 
     //
     EditText tests;
+    String test;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +57,8 @@ public class RecipeFinder extends AppCompatActivity {
         ingredients = new ArrayList<>(Arrays.asList(items));
         adapter = new ArrayAdapter<String>(this,R.layout.list_item,R.id.ing,ingredients);
         ings.setAdapter(adapter);
+
+        ings.setOnItemClickListener(new itemClick());
 
         //Initializing the database for this activity
         myDB = new DatabaseHelper(this);
@@ -101,7 +106,7 @@ public class RecipeFinder extends AppCompatActivity {
         while(search.moveToNext()){
             buffer.append("ID: "+search.getString(0)+"\n");
             buffer.append("Name: "+search.getString(1)+"\n");
-            buffer.append("Ings: "+search.getString(2)+"\n");
+            buffer.append("Ings: "+search.getString(2) + "\n");
         }
         show("data", buffer.toString());
     }
@@ -139,6 +144,31 @@ public class RecipeFinder extends AppCompatActivity {
         builder.setTitle(title);
         builder.setMessage(message);
         builder.show();
+    }
+
+    public int getIndexByname(String name)
+    {
+        for(String ing :ingredients)
+        {
+            if(ing.equals(name))
+                return ingredients.indexOf(ing);
+        }
+        return -1;
+    }
+
+    //Deleting ingredients from our search
+    class itemClick implements AdapterView.OnItemClickListener {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position,
+                                long id) {
+            ViewGroup vg = (ViewGroup) view;
+            TextView name = (TextView) vg.findViewById(R.id.ing);
+
+            test = name.getText().toString();
+            ingredients.remove(getIndexByname(test));
+            //Log.d("het recept", recipe);
+            adapter.notifyDataSetChanged();
+        }
     }
 
 }
