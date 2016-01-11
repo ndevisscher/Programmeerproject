@@ -5,4 +5,4 @@ als er meerdere mensen mee-eten, (.in mogelijk?)
 - sorteer de arraylist alfabetisch
 - zet het om zodat het gebruikt kan worden in een query String[]
 - query met NOT LIKE 
-- 
+-
