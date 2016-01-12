@@ -125,45 +125,12 @@ public class RecipeFinder extends AppCompatActivity {
         ingsIn.setText("");
     }
 
-    //Searching for the recipes and passing the data to the next activity
-    public void searchRecipe(View view){
-
-        recipes = new ArrayList<>();
-        //Getting the ingredients that we are searching for in the right variables
-        String extra ="";
-        Collections.sort(ingredients);
-        for (String ing: ingredients){
-            extra = extra + "%"+ing+"%";
-        }
-        Log.d("extracheck", extra);
-        String[] check = {extra};
-
-        //Searching the database for recipes with the given ingredients
-        Cursor search = myDB.searchOnIngredient(extra);
-        //End the function if no recipes are found
-        if (search.getCount() == 0) {
-            Log.d("geen data", "geen data");
-            show("probeer het nogmaals","er zijn geen resultaten gevonden voor de zoekopdracht");
-            return;
-        } else
-            Log.d("wel data", "wel data");
-
-        //Adding the names of the recipes from our results to the array
-        while(search.moveToNext()){
-            recipes.add(search.getString(1));
-        }
-
-        //Passing the names of the recipes to the new activity
-        Intent intent = new Intent(this,SearchedRecipes.class);
-        intent.putStringArrayListExtra("searchResults", recipes);
-        startActivity(intent);
-
-    }
 
     //Searching for the recipes and passing the data to the next activity
     public void fullSearch(View view){
 
         String[] items = {};
+        //New arraylist for the recipes we find, we pass this to the next activity
         recipes = new ArrayList<>(Arrays.asList(items));
         //Getting the ingredients that we are searching for in the right variables
         String ings ="";
@@ -172,16 +139,21 @@ public class RecipeFinder extends AppCompatActivity {
             ings = ings + "%"+ing+"%";
         }
 
+        //Getting the allergies from the selected people in the app
         allergies = new ArrayList<>();
         String allergs = "";
+        //Every person is selected individually and we split the name so we can search the database
         for(String Person: selectedPeople) {
             String[] split = Person.split(" ");
             firstname = split[0];
             adj = split[1];
             lastname = split[2];
+            //Searching the database for the allergies of 1 person
             Cursor getAllergies = myDB.getAllergie(firstname,adj,lastname);
             while (getAllergies.moveToNext()) {
+                //Splitting the allergies, because we save them as 1 long string with spaces
                 String[] allergSplit = getAllergies.getString(0).split(" ");
+                //Adding the allergies to our array, so we can use them for our search later
                 for (String item:allergSplit){
                     if(allergies.contains(item)){
                         //do nothing, because the item is already in the list
@@ -193,6 +165,8 @@ public class RecipeFinder extends AppCompatActivity {
             }
         }
 
+        //Sorting the allergies alphabetically and removing the first value if needed, because it will
+        //will be an empty variable
         Collections.sort(allergies);
         if(allergies.size() > 1) {
             allergies.remove(0);
@@ -200,8 +174,6 @@ public class RecipeFinder extends AppCompatActivity {
         for(String allerg:allergies){
             allergs = allergs + "%"+allerg+"%";
         }
-
-        Log.d("allergiecheck",allergs);
 
         //Searching the database for recipes with the given ingredients
         Cursor search;

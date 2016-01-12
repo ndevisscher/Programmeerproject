@@ -120,7 +120,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
     //Full search with the allergies and ingredients
     public Cursor fullSearch (String ingredients, String allergies){
-        String[] etc = {allergies,ingredients};
+        String[] etc = {ingredients,allergies};
         SQLiteDatabase db = this.getWritableDatabase();
         String searchQ = "SELECT * FROM "+ Recipe.TABLE + " WHERE " + Recipe.INGS + " LIKE ? AND "
                 + Recipe.INGS + " NOT LIKE ?";
