@@ -87,9 +87,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     //For upgrading the tables
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP TABLE IF EXISTS "+Recipe.TABLE);
-        db.execSQL("DROP TABLE IF EXISTS "+Ingredients.TABLE);
-        db.execSQL("DROP TABLE IF EXISTS "+Person.TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + Recipe.TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + Ingredients.TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + Person.TABLE);
         onCreate(db);
     }
 
@@ -101,7 +101,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(Recipe.Descript, descript);
         contentValues.put(Recipe.INGS, ings);
 
-        long result = db.insert(Recipe.TABLE,null,contentValues);
+        long result = db.insert(Recipe.TABLE, null, contentValues);
         if (result == -1){
             return false;
         }
@@ -116,19 +116,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor search = db.rawQuery(searchQ,ingredient);
         return search;
     }
+    //Full search with the allergies and ingredients
+    public Cursor fullSearch (String ingredients, String allergies){
+        String[] etc = {allergies,ingredients};
+        SQLiteDatabase db = this.getWritableDatabase();
+        String searchQ = "SELECT * FROM "+ Recipe.TABLE + " WHERE " + Recipe.INGS + " LIKE ? AND WHERE "
+                + Recipe.INGS + " NOT LIKE ?";
+        Cursor search = db.rawQuery(searchQ,etc);
+        return search;
+    }
 
     //Getting all recipes from the recipe_table
     public Cursor searchRecipe (){
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor search = db.rawQuery("SELECT * FROM "+ Recipe.TABLE,null);
-        return search;
-    }
-
-    //Getting a recipe from the recipe_table based of RcpName
-    public Cursor getRecipeInfo (String[] rcpName){
-        SQLiteDatabase db = this.getReadableDatabase();
-        String SelectQ = "SELECT * FROM "+ Recipe.TABLE + " WHERE " + Recipe.RcpName + "=?";
-        Cursor search = db.rawQuery(SelectQ,rcpName);
         return search;
     }
 
@@ -169,10 +170,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return search;
     }
 
-    public Cursor getRecipe (String[] Ings){
-        SQLiteDatabase db = this.getReadableDatabase();
-        String SelectQ = "SELECT * FROM "+ Recipe.TABLE + " WHERE " + Recipe.RcpName + "=?";
-        Cursor search = db.rawQuery(SelectQ,Ings);
-        return search;
-    }
+//    public Cursor getRecipe (String[] Ings){
+//        SQLiteDatabase db = this.getReadableDatabase();
+//        String SelectQ = "SELECT * FROM "+ Recipe.TABLE + " WHERE " + Recipe.RcpName + "=?";
+//        Cursor search = db.rawQuery(SelectQ,Ings);
+//        return search;
+//    }
 }

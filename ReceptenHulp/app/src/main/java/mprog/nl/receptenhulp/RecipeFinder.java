@@ -14,6 +14,8 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -29,24 +31,26 @@ public class RecipeFinder extends AppCompatActivity {
     DatabaseHelper myDB;
 
     private ArrayList<String> ingredients;
+    private ArrayList<String> peopleChoice;
+    private ArrayList<String> selectedPeople;
     private ArrayAdapter<String> adapter;
+    private ArrayAdapter<String> peopleAdapter;
     ArrayList<String> recipes;
+
+    ListView people;
 
     EditText ingsIn;
     Button add;
     Button search;
 
-    //
-    EditText tests;
-    String test;
+    CheckBox checking;
+
+    String item;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_recipe_finder);
-
-        //
-        tests = (EditText) findViewById(R.id.test);
 
         //Initializing the buttons and inputfields
         add = (Button) findViewById(R.id.add);
@@ -61,6 +65,29 @@ public class RecipeFinder extends AppCompatActivity {
         ings.setAdapter(adapter);
         ings.setOnItemClickListener(new itemClick());
 
+        //Setting up the listview and checkbox for the people choice
+        people = (ListView)findViewById(R.id.personList);
+        people.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
+        peopleChoice = new ArrayList<>();
+        peopleAdapter = new ArrayAdapter<String>(this,R.layout.person_layout,R.id.person,peopleChoice);
+        people.setAdapter(peopleAdapter);
+
+        //Here we add people to our selected list and show the user what they have selected with a checkbox
+        selectedPeople = new ArrayList<>();
+        people.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+              @Override
+              public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                  String select = peopleChoice.get(position);
+                  if(selectedPeople.contains(select)){
+                      selectedPeople.remove(select);
+                  }
+                  else{
+                      selectedPeople.add(select);
+                  }
+              }
+        });
+
+
         //Initializing the database for this activity
         myDB = new DatabaseHelper(this);
 
@@ -69,7 +96,11 @@ public class RecipeFinder extends AppCompatActivity {
         setSupportActionBar(object);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        //Add people from the database to the list to select them
+        showPeople();
     }
+
+
 
     //Using the back button from the toolbar to go to the previous screen
     @Override
@@ -81,16 +112,10 @@ public class RecipeFinder extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    //Searching for the wanted recipe giving the search criteria
-    public void Search (View view) {
-        Intent intent = new Intent(this, SearchedRecipes.class);
-        startActivity(intent);
-    }
-
     //Adding an ingredient to our search
     public void addings (View view){
-        String testitem = ingsIn.getText().toString();
-        ingredients.add(testitem);
+        String ingItem = ingsIn.getText().toString();
+        ingredients.add(ingItem);
         adapter.notifyDataSetChanged();
         ingsIn.setText("");
     }
@@ -127,6 +152,52 @@ public class RecipeFinder extends AppCompatActivity {
         intent.putStringArrayListExtra("searchResults", recipes);
         startActivity(intent);
 
+    }
+
+    //Searching for the recipes and passing the data to the next activity
+    public void fullSearch(View view){
+
+        recipes = new ArrayList<>();
+        //Getting the ingredients that we are searching for in the right variables
+        String ings ="";
+        Collections.sort(ingredients);
+        for (String ing: ingredients){
+            ings = ings + "%"+ing+"%";
+        }
+        //String[] check = {extra};
+
+        String allergs = "";
+        
+        //Searching the database for recipes with the given ingredients
+        Cursor search = myDB.fullSearch(ings,allergs);
+        //End the function if no recipes are found
+        if (search.getCount() == 0) {
+            Log.d("geen data", "geen data");
+            show("probeer het nogmaals","er zijn geen resultaten gevonden voor de zoekopdracht");
+            return;
+        } else
+            Log.d("wel data", "wel data");
+
+        //Adding the names of the recipes from our results to the array
+        while(search.moveToNext()){
+            recipes.add(search.getString(1));
+        }
+
+        //Passing the names of the recipes to the new activity
+        Intent intent = new Intent(this,SearchedRecipes.class);
+        intent.putStringArrayListExtra("searchResults", recipes);
+        startActivity(intent);
+
+    }
+
+    public void showPeople (){
+        String data = "";
+        Cursor search = myDB.showPeople();
+        while (search.moveToNext()){
+            data = search.getString(1) + " " + search.getString(2) + " " +search.getString(3);
+            peopleChoice.add(data);
+        }
+        //peopleAdapter.notifyDataSetChanged();
     }
 
     //Test om recepten op ingredient te vinden
@@ -182,10 +253,11 @@ public class RecipeFinder extends AppCompatActivity {
             ViewGroup vg = (ViewGroup) view;
             TextView name = (TextView) vg.findViewById(R.id.ing);
 
-            test = name.getText().toString();
-            ingredients.remove(getIndexByname(test));
+            item = name.getText().toString();
+            ingredients.remove(getIndexByname(item));
             adapter.notifyDataSetChanged();
         }
     }
+
 
 }

@@ -74,8 +74,8 @@ public class AddPerson extends AppCompatActivity {
 
     //Adding an ingredient to the allergies list
     public void addAllergie (View view){
-        String testitem = allergLine.getText().toString();
-        ingredients.add(testitem);
+        String allergieItem = allergLine.getText().toString();
+        ingredients.add(allergieItem);
         adapter.notifyDataSetChanged();
         allergLine.setText("");
     }
