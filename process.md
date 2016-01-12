@@ -30,3 +30,7 @@ Vond een probleem met de emulator cache, waardoor ik dacht dat de database niet 
 - Comments toegevoegd aan de meeste java documente om de code overzichtelijker te maken.
 - Toevoegen van bereidingswijze is mogelijk als een recept wordt toegevoegd.
 - Navigeren tussen activities aangepast door de back knop nu in de toolbar te zetten.
+
+#day 7:
+- Zoekfunctie werkt nu volledig, er kan gezocht worden op ingredienten en de allergien van mensen worden meegenomen
+- extra methodes voor de database geschreven, deze zijn nodig voor het ophalen van de allergien van een persoon en deze toe te voegen aan een lijst zodat deze kunnen worden gebruikt voor de zoekfunctie
