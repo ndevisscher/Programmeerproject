@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 /**
  * Created by lol_l on 6-1-2016.
@@ -110,17 +111,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     //Search for recipes given an ingredient
-    public Cursor searchOnIngredient (String[] ingredient){
+    public Cursor searchOnIngredient (String ingredient){
+        String[] input = {ingredient};
         SQLiteDatabase db = this.getWritableDatabase();
         String searchQ = "SELECT * FROM "+ Recipe.TABLE + " WHERE " + Recipe.INGS + " LIKE ?";
-        Cursor search = db.rawQuery(searchQ,ingredient);
+        Cursor search = db.rawQuery(searchQ, input);
         return search;
     }
     //Full search with the allergies and ingredients
     public Cursor fullSearch (String ingredients, String allergies){
         String[] etc = {allergies,ingredients};
         SQLiteDatabase db = this.getWritableDatabase();
-        String searchQ = "SELECT * FROM "+ Recipe.TABLE + " WHERE " + Recipe.INGS + " LIKE ? AND WHERE "
+        String searchQ = "SELECT * FROM "+ Recipe.TABLE + " WHERE " + Recipe.INGS + " LIKE ? AND "
                 + Recipe.INGS + " NOT LIKE ?";
         Cursor search = db.rawQuery(searchQ,etc);
         return search;
@@ -170,10 +172,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return search;
     }
 
-//    public Cursor getRecipe (String[] Ings){
-//        SQLiteDatabase db = this.getReadableDatabase();
-//        String SelectQ = "SELECT * FROM "+ Recipe.TABLE + " WHERE " + Recipe.RcpName + "=?";
-//        Cursor search = db.rawQuery(SelectQ,Ings);
-//        return search;
-//    }
+    //Get the allergie for a single person
+    public Cursor getAllergie (String firstname,String adj, String lastname){
+        String[] wanted = {firstname,adj,lastname};
+        SQLiteDatabase db = this.getReadableDatabase();
+        String SelectQ = " SELECT ALLERGIES FROM "+ Person.TABLE + " WHERE " + Person.FIRSTNAME + " =? AND "
+                + Person.ADJ + " =? AND " + Person.LASTNAME + " =? ";
+        Log.d("query", SelectQ);
+        Cursor search = db.rawQuery(SelectQ,wanted);
+        return search;
+    }
+
+    //Return the data from a recipe
+    public Cursor getRecipeInfo (String[] rcpName) {
+        SQLiteDatabase db = this.getReadableDatabase();
+        String SelectQ = "SELECT * FROM " + Recipe.TABLE + " WHERE " + Recipe.RcpName + "=?";
+        Cursor search = db.rawQuery(SelectQ, rcpName);
+        return search;
+    }
 }

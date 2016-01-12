@@ -35,7 +35,9 @@ public class RecipeFinder extends AppCompatActivity {
     private ArrayList<String> selectedPeople;
     private ArrayAdapter<String> adapter;
     private ArrayAdapter<String> peopleAdapter;
+
     ArrayList<String> recipes;
+    ArrayList<String> allergies;
 
     ListView people;
 
@@ -46,6 +48,9 @@ public class RecipeFinder extends AppCompatActivity {
     CheckBox checking;
 
     String item;
+    String firstname;
+    String adj;
+    String lastname;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -130,10 +135,11 @@ public class RecipeFinder extends AppCompatActivity {
         for (String ing: ingredients){
             extra = extra + "%"+ing+"%";
         }
+        Log.d("extracheck", extra);
         String[] check = {extra};
 
         //Searching the database for recipes with the given ingredients
-        Cursor search = myDB.searchOnIngredient(check);
+        Cursor search = myDB.searchOnIngredient(extra);
         //End the function if no recipes are found
         if (search.getCount() == 0) {
             Log.d("geen data", "geen data");
@@ -157,19 +163,56 @@ public class RecipeFinder extends AppCompatActivity {
     //Searching for the recipes and passing the data to the next activity
     public void fullSearch(View view){
 
-        recipes = new ArrayList<>();
+        String[] items = {};
+        recipes = new ArrayList<>(Arrays.asList(items));
         //Getting the ingredients that we are searching for in the right variables
         String ings ="";
         Collections.sort(ingredients);
         for (String ing: ingredients){
             ings = ings + "%"+ing+"%";
         }
-        //String[] check = {extra};
 
+        allergies = new ArrayList<>();
         String allergs = "";
-        
+        for(String Person: selectedPeople) {
+            String[] split = Person.split(" ");
+            firstname = split[0];
+            adj = split[1];
+            lastname = split[2];
+            Cursor getAllergies = myDB.getAllergie(firstname,adj,lastname);
+            while (getAllergies.moveToNext()) {
+                String[] allergSplit = getAllergies.getString(0).split(" ");
+                for (String item:allergSplit){
+                    if(allergies.contains(item)){
+                        //do nothing, because the item is already in the list
+                    }
+                    else{
+                        allergies.add(item);
+                    }
+                }
+            }
+        }
+
+        Collections.sort(allergies);
+        if(allergies.size() > 1) {
+            allergies.remove(0);
+        }
+        for(String allerg:allergies){
+            allergs = allergs + "%"+allerg+"%";
+        }
+
+        Log.d("allergiecheck",allergs);
+
         //Searching the database for recipes with the given ingredients
-        Cursor search = myDB.fullSearch(ings,allergs);
+        Cursor search;
+        //If allergies are given search with both allergies and ingredients
+        if(!allergs.isEmpty()) {
+            search = myDB.fullSearch(ings, allergs);
+        }
+        //If no allergies are given, just search on ingredients
+        else{
+            search = myDB.searchOnIngredient(ings);
+        }
         //End the function if no recipes are found
         if (search.getCount() == 0) {
             Log.d("geen data", "geen data");
@@ -190,6 +233,7 @@ public class RecipeFinder extends AppCompatActivity {
 
     }
 
+    //Shows the people from the database in the list to be selected
     public void showPeople (){
         String data = "";
         Cursor search = myDB.showPeople();
@@ -209,7 +253,7 @@ public class RecipeFinder extends AppCompatActivity {
         }
         String[] check = {extra};
 
-        Cursor search = myDB.searchOnIngredient(check);
+        Cursor search = myDB.searchOnIngredient(extra);
         if (search.getCount() == 0) {
             Log.d("geen data", "geen data");
         } else

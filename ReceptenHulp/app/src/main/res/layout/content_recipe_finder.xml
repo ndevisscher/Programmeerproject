@@ -82,7 +82,7 @@
         android:layout_height="wrap_content"
         android:text="test"
         android:id="@+id/testie"
-        android:onClick="test"
+        android:onClick="fullSearch"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />

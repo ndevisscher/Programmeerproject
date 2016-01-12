@@ -91,7 +91,7 @@ public class AddRecipe extends AppCompatActivity {
         //Adding the recipe to the database with the given info
         myDB.addRecipe(recipeName, descript,ings);
 
-        addIngredients(recipeName);
+        //addIngredients(recipeName);
         //Clearing the datafields
         recipeLine.setText("");
         ingredients.clear();
@@ -100,18 +100,18 @@ public class AddRecipe extends AppCompatActivity {
     }
 
     //Adding the ingredients to the database
-    public void addIngredients (String rcpName){
-
-        int ID = 0;
-
-        String[] test = {rcpName};
-        Cursor get = myDB.getRecipe(test);
-        //ID = Integer.parseInt(get.getString(0));
-
-        for (String ing : ingredients) {
-            myDB.addIngredients(ing, rcpName);
-        }
-    }
+//    public void addIngredients (String rcpName){
+//
+//        int ID = 0;
+//
+//        String[] test = {rcpName};
+//        Cursor get = myDB.getRecipe(test);
+//        //ID = Integer.parseInt(get.getString(0));
+//
+//        for (String ing : ingredients) {
+//            myDB.addIngredients(ing, rcpName);
+//        }
+//    }
 
     //Adding ingredients to the list to add to the recipe
     public void addings (View view){
