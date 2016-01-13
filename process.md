@@ -34,3 +34,7 @@ Vond een probleem met de emulator cache, waardoor ik dacht dat de database niet 
 #day 7:
 - Zoekfunctie werkt nu volledig, er kan gezocht worden op ingredienten en de allergien van mensen worden meegenomen
 - extra methodes voor de database geschreven, deze zijn nodig voor het ophalen van de allergien van een persoon en deze toe te voegen aan een lijst zodat deze kunnen worden gebruikt voor de zoekfunctie
+
+#day 8:
+- code een beetje opgeschoond, testvariabelen en methodes verwijdert om de app in zijn geheel te kunnen testen, alles werkt goed zoals het er nu uit ziet.
+- 
