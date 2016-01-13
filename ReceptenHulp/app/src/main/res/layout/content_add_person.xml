@@ -14,7 +14,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Voeg persoon toe"
+        android:text="@string/add_person"
         android:id="@+id/AddPerson"
         android:onClick="addPerson"
         android:layout_alignParentBottom="true"
@@ -32,7 +32,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignRight="@+id/Info"
         android:layout_alignEnd="@+id/Info"
-        android:hint="Voornaam"/>
+        android:hint="@string/firstname_hint"/>
 
     <EditText
         android:layout_width="wrap_content"
@@ -44,7 +44,7 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="26dp"
-        android:hint="Tussenvoegsel"/>
+        android:hint="@string/adj_hint"/>
 
     <EditText
         android:layout_width="wrap_content"
@@ -58,12 +58,12 @@
         android:layout_marginTop="27dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
-        android:hint="Achternaam"/>
+        android:hint="@string/lastname_hint"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Voeg een persoon toe"
+        android:text="@string/add_person_text"
         android:id="@+id/Info"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
@@ -85,7 +85,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="voeg allergie toe"
+        android:text="@string/add_allergie"
         android:id="@+id/allergie"
         android:layout_above="@+id/AddPerson"
         android:layout_alignParentRight="true"
@@ -96,7 +96,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/allergieInput"
-        android:hint="Geef een allergie op"
+        android:hint="@string/allerg_hint"
         android:layout_above="@+id/AddPerson"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
@@ -104,7 +104,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Allergiën:"
+        android:text="@string/allergs"
         android:id="@+id/textView"
         android:layout_below="@+id/lastName"
         android:layout_alignParentLeft="true"

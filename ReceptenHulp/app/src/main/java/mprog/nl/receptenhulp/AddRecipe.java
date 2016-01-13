@@ -33,6 +33,7 @@ public class AddRecipe extends AppCompatActivity {
 
     String descript = "";
     String ings = "";
+    String preperation = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -109,13 +110,13 @@ public class AddRecipe extends AppCompatActivity {
         descriptBuilder.setTitle("bereidingswijze");
         descriptBuilder.setMessage("Voer hier de bereidingswijze van het recept in.");
         final EditText descInput = new EditText(this);
-        descInput.setSingleLine();
-        descInput.setText("");
+        descInput.setText(preperation);
         descriptBuilder.setView(descInput);
         descriptBuilder.setPositiveButton("Ok",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         descript = descInput.getText().toString();
+                        preperation = descript;
                     }
                 });
         //Pop-up for the description input

@@ -14,7 +14,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Recept Toevoegen"
+        android:text="@string/add_recipes"
         android:id="@+id/RecipeName"
         android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/addRecipe"
         android:layout_marginTop="33dp"
-        android:hint="vul de naam van het recept in"
+        android:hint="@string/recipe_hint"
         android:layout_below="@+id/RecipeName"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -39,7 +39,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Voeg recept toe"
+        android:text="@string/add_recipe"
         android:id="@+id/add"
         android:onClick="addRecipe"
         android:layout_alignParentBottom="true"
@@ -50,7 +50,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ingredient toevoegen"
+        android:text="@string/add_ingredient"
         android:id="@+id/adding"
         android:onClick="addings"
         android:layout_above="@+id/add"
@@ -80,7 +80,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Ingrediënten:"
+        android:text="@string/ings"
         android:id="@+id/textView3"
         android:layout_below="@+id/addRecipe"
         android:layout_alignParentLeft="true"
@@ -93,7 +93,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Voeg bereidingswijze toe"
+        android:text="@string/add_description"
         android:id="@+id/descript"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"

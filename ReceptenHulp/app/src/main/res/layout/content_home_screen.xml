@@ -9,43 +9,42 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="mprog.nl.receptenhulp.HomeScreen">
+    tools:context="mprog.nl.receptenhulp.HomeScreen"
+    tools:showIn="@layout/activity_home_screen">
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Recepten vinden"
+        android:text="@string/Search_recipes"
         android:id="@+id/button2"
+        android:onClick="FindRecipe"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:onClick="FindRecipe" />
+        android:layout_alignLeft="@+id/button"
+        android:layout_alignStart="@+id/button"
+        android:layout_alignRight="@+id/button"
+        android:layout_alignEnd="@+id/button" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Recepten toevoegen"
+        android:text="@string/add_recipes"
         android:id="@+id/button"
-        android:layout_marginBottom="44dp"
-        android:layout_above="@+id/button4"
-        android:layout_centerHorizontal="true"
-        android:onClick="addRecipe" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Mensen toevoegen"
-        android:id="@+id/button4"
-        android:layout_marginBottom="55dp"
-        android:onClick="addPeople"
-        android:layout_alignParentBottom="true"
+        android:onClick="addRecipe"
+        android:layout_marginTop="30dp"
+        android:layout_below="@+id/button2"
         android:layout_centerHorizontal="true" />
 
-    <TextView
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="ReceptenHulp"
-        android:id="@+id/textView2"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="23dp" />
+        android:text="@string/add_people"
+        android:id="@+id/button4"
+        android:onClick="addPeople"
+        android:layout_marginTop="26dp"
+        android:layout_below="@+id/button"
+        android:layout_alignLeft="@+id/button"
+        android:layout_alignStart="@+id/button"
+        android:layout_alignRight="@+id/button"
+        android:layout_alignEnd="@+id/button" />
+
 </RelativeLayout>

@@ -3,6 +3,7 @@ package mprog.nl.receptenhulp;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,6 +17,10 @@ public class HomeScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_screen);
         myDB = new DatabaseHelper(this);
+
+        //This allows us to use the back button on the toolbar
+        Toolbar object = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(object);
     }
 
     //Go to the search activity
@@ -43,13 +48,13 @@ public class HomeScreen extends AppCompatActivity {
         return true;
     }
 
-    //This is to activate the back button that we use in the toolbar for our app
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
+//    //This is to activate the back button that we use in the toolbar for our app
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        int id = item.getItemId();
+//        if (id == R.id.action_settings) {
+//            return true;
+//        }
+//        return super.onOptionsItemSelected(item);
+//    }
 }
