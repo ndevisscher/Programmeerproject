@@ -37,4 +37,4 @@ Vond een probleem met de emulator cache, waardoor ik dacht dat de database niet 
 
 #day 8:
 - code een beetje opgeschoond, testvariabelen en methodes verwijdert om de app in zijn geheel te kunnen testen, alles werkt goed zoals het er nu uit ziet.
-- 
+- begonnen met het toevoegen van alle strings aan de string.xml
