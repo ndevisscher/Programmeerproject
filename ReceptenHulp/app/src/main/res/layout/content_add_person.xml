@@ -18,10 +18,7 @@
         android:id="@+id/AddPerson"
         android:onClick="addPerson"
         android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/Check"
-        android:layout_toEndOf="@+id/Check"
-        android:layout_marginLeft="42dp"
-        android:layout_marginStart="42dp" />
+        android:layout_centerHorizontal="true" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -100,18 +97,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/allergieInput"
         android:hint="Geef een allergie op"
-        android:layout_above="@+id/Check"
-        android:layout_toLeftOf="@+id/allergie"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Check"
-        android:id="@+id/Check"
-        android:onClick="showPeople"
-        android:layout_alignParentBottom="true"
+        android:layout_above="@+id/AddPerson"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 

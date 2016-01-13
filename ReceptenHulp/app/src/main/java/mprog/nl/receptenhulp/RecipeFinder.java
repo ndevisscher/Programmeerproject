@@ -1,7 +1,6 @@
 package mprog.nl.receptenhulp;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -14,8 +13,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -23,7 +20,6 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
 
 public class RecipeFinder extends AppCompatActivity {
 
@@ -44,8 +40,6 @@ public class RecipeFinder extends AppCompatActivity {
     EditText ingsIn;
     Button add;
     Button search;
-
-    CheckBox checking;
 
     String item;
     String firstname;
@@ -213,32 +207,6 @@ public class RecipeFinder extends AppCompatActivity {
             data = search.getString(1) + " " + search.getString(2) + " " +search.getString(3);
             peopleChoice.add(data);
         }
-        //peopleAdapter.notifyDataSetChanged();
-    }
-
-    //Test om recepten op ingredient te vinden
-    public void test(View view){
-        String extra ="";
-        Collections.sort(ingredients);
-        for (String ing: ingredients){
-            extra = extra + "%"+ing+"%";
-        }
-        String[] check = {extra};
-
-        Cursor search = myDB.searchOnIngredient(extra);
-        if (search.getCount() == 0) {
-            Log.d("geen data", "geen data");
-        } else
-            Log.d("wel data", "wel data");
-        StringBuffer buffer = new StringBuffer();
-        while(search.moveToNext()){
-            buffer.append("ID: "+search.getString(0)+"\n");
-            buffer.append("Name: "+search.getString(1)+"\n");
-            buffer.append("Descript: "+search.getString(2)+"\n");
-            buffer.append("Ings: "+search.getString(3)+"\n");
-        }
-        //show("data", buffer.toString());
-        show("data",buffer.toString());
     }
 
     //This will show the message when the search has no results

@@ -2,12 +2,9 @@ package mprog.nl.receptenhulp;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -91,27 +88,12 @@ public class AddRecipe extends AppCompatActivity {
         //Adding the recipe to the database with the given info
         myDB.addRecipe(recipeName, descript,ings);
 
-        //addIngredients(recipeName);
         //Clearing the datafields
         recipeLine.setText("");
         ingredients.clear();
         ings = "";
         adapter.notifyDataSetChanged();
     }
-
-    //Adding the ingredients to the database
-//    public void addIngredients (String rcpName){
-//
-//        int ID = 0;
-//
-//        String[] test = {rcpName};
-//        Cursor get = myDB.getRecipe(test);
-//        //ID = Integer.parseInt(get.getString(0));
-//
-//        for (String ing : ingredients) {
-//            myDB.addIngredients(ing, rcpName);
-//        }
-//    }
 
     //Adding ingredients to the list to add to the recipe
     public void addings (View view){
@@ -123,7 +105,6 @@ public class AddRecipe extends AppCompatActivity {
 
     //A popup so you can add the description for the recipe
     private void descriptInput() {
-
         AlertDialog.Builder descriptBuilder = new AlertDialog.Builder(this);
         descriptBuilder.setTitle("bereidingswijze");
         descriptBuilder.setMessage("Voer hier de bereidingswijze van het recept in.");
@@ -133,21 +114,19 @@ public class AddRecipe extends AppCompatActivity {
         descriptBuilder.setView(descInput);
         descriptBuilder.setPositiveButton("Ok",
                 new DialogInterface.OnClickListener() {
-
                     public void onClick(DialogInterface dialog, int which) {
                         descript = descInput.getText().toString();
                     }
                 });
-
+        //Pop-up for the description input
         AlertDialog descript = descriptBuilder.create();
         descript.show();
     }
 
-    //Actually dispalying the popup for the description
+    //Actually dispalying the popup for the description when te button is pressed
     public void showDescriptInput (View view){
         descriptInput();
     }
-
 
 }
 

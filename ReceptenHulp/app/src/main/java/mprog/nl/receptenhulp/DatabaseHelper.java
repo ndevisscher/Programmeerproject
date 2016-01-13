@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
 /**
- * Created by lol_l on 6-1-2016.
+ * Created by Niek on 6-1-2016.
  */
 public class DatabaseHelper extends SQLiteOpenHelper {
 
@@ -22,17 +22,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         public static final String RcpName = "RcpName";
         public static final String Descript = "Descript";
         public static final String INGS = "Ings";
-    }
-
-    //Info for the ingredients table
-    public class Ingredients {
-        // Labels table name
-        public static final String TABLE = "ingredients_table";
-
-        // Labels Table Columns names
-        public static final String ID = "id";
-        public static final String INGREDIENT = "INGREDIENT";
-        public static final String RCPID = "RCPid";
     }
 
     //Info for the people table
@@ -63,12 +52,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + Recipe.Descript + " TEXT,"
             + Recipe.INGS + " TEXT )";
 
-    //Ingredient table SQL
-    String CREATE_TABLE_INGREDIENTS = "CREATE TABLE " + Ingredients.TABLE  + "("
-            + Ingredients.ID  + " INTEGER PRIMARY KEY AUTOINCREMENT , "
-            + Ingredients.RCPID + " TEXT ,"
-            + Ingredients.INGREDIENT + " TEXT )";
-
     //Person table SQL
     String CREATE_TABLE_PEOPLE = "CREATE TABLE " + Person.TABLE  + "("
             + Person.ID  + " INTEGER PRIMARY KEY AUTOINCREMENT , "
@@ -81,7 +64,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_TABLE_RECIPES);
-        db.execSQL(CREATE_TABLE_INGREDIENTS);
         db.execSQL(CREATE_TABLE_PEOPLE);
     }
 
@@ -89,7 +71,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + Recipe.TABLE);
-        db.execSQL("DROP TABLE IF EXISTS " + Ingredients.TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + Person.TABLE);
         onCreate(db);
     }
@@ -118,6 +99,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor search = db.rawQuery(searchQ, input);
         return search;
     }
+
     //Full search with the allergies and ingredients
     public Cursor fullSearch (String ingredients, String allergies){
         String[] etc = {ingredients,allergies};
@@ -126,27 +108,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 + Recipe.INGS + " NOT LIKE ?";
         Cursor search = db.rawQuery(searchQ,etc);
         return search;
-    }
-
-    //Getting all recipes from the recipe_table
-    public Cursor searchRecipe (){
-        SQLiteDatabase db = this.getWritableDatabase();
-        Cursor search = db.rawQuery("SELECT * FROM "+ Recipe.TABLE,null);
-        return search;
-    }
-
-    //Adding ingredients to the ingredients_table
-    public boolean addIngredients (String ingredient, String rcpId){
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put(Ingredients.INGREDIENT, ingredient);
-        contentValues.put(Ingredients.RCPID, rcpId);
-        long result = db.insert(Ingredients.TABLE, null, contentValues);
-        if (result == -1){
-            return false;
-        }
-        else
-            return true;
     }
 
     //Adding a person to the Person_table
