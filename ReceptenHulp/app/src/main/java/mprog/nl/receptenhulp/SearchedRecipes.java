@@ -26,8 +26,6 @@ public class SearchedRecipes extends AppCompatActivity {
     ArrayList<String> recipes;
     private ArrayAdapter<String> adapter;
 
-    Button back;
-    Button newSearch;
     String recipe;
 
     @Override
@@ -38,9 +36,6 @@ public class SearchedRecipes extends AppCompatActivity {
         //Getting the search results from our previous activity
         Intent get = getIntent();
         recipes = get.getStringArrayListExtra("searchResults");
-
-        back = (Button) findViewById(R.id.Home);
-        newSearch = (Button) findViewById(R.id.NewSearch);
 
         //Initializing the database for this activity
         myDB = new DatabaseHelper(this);

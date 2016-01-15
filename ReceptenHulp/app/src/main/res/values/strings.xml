@@ -31,4 +31,5 @@
 
     <string name="new_search">Nieuwe zoekopdracht</string>
     <string name="return_home">Terug naar hoofdmenu</string>
+    <string name="title_activity_group_management">GroupManagement</string>
 </resources>

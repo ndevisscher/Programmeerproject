@@ -1,9 +1,11 @@
 package mprog.nl.receptenhulp;
 
 import android.app.AlertDialog;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -24,9 +26,6 @@ public class AddPerson extends AppCompatActivity {
     EditText Adj;
     EditText LastName;
     EditText allergLine;
-
-    Button back;
-    Button add;
 
     private ArrayList<String> ingredients;
     private ArrayAdapter<String> adapter;
@@ -80,10 +79,24 @@ public class AddPerson extends AppCompatActivity {
     //Adding the person with all their information to the database
     public void addPerson(View view) {
 
-        //Getting the data from the input
+        //Getting the data from the input and setting it as "" if it had no input
         String firstName = FirstName.getText().toString();
+        if (firstName.length() == 0){
+            firstName = "";
+        }
         String adj = Adj.getText().toString();
+        if(adj.length() == 0){
+            adj = "";
+        }
         String lastName = LastName.getText().toString();
+        if(lastName.length() == 0){
+            lastName = "";
+        }
+        //Don't input anything if all fields are blank
+        if(firstName == "" || lastName ==""){
+            show("ongeldige invoer", "Voer een voor- en achternaam in");
+            return;
+        }
         String allergies = "";
 
         //Sorting the allergies and preparing them for the database

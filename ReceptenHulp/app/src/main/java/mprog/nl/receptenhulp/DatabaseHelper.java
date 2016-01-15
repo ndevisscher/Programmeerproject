@@ -5,7 +5,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.database.sqlite.SQLiteStatement;
 import android.util.Log;
+
+import java.sql.PreparedStatement;
 
 /**
  * Created by Niek on 6-1-2016.
@@ -38,6 +41,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     }
 
+    //Info for the people table
+    public class Group {
+        // Labels table name
+        public static final String TABLE = "group_table";
+
+        // Labels Table Columns names
+        public static final String ID = "id";
+        public static final String GROUPNAME = "GROUPNAME";
+        public static final String PEOPLELIST = "PEOPLELIST";
+
+    }
+
     public static final String DATABASE_NAME = "Recipes.db";
 
     public DatabaseHelper(Context context) {
@@ -60,11 +75,18 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             + Person.LASTNAME + " TEXT ,"
             + Person.ALLERGIES + " TEXT )";
 
+    //Group table SQL
+    String CREATE_TABLE_GROUPS = "CREATE TABLE " + Group.TABLE  + "("
+            + Group.ID  + " INTEGER PRIMARY KEY AUTOINCREMENT , "
+            + Group.GROUPNAME + " TEXT ,"
+            + Group.PEOPLELIST + " TEXT )";
+
     //Creating the tables
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_TABLE_RECIPES);
         db.execSQL(CREATE_TABLE_PEOPLE);
+        db.execSQL(CREATE_TABLE_GROUPS);
     }
 
     //For upgrading the tables
@@ -72,6 +94,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + Recipe.TABLE);
         db.execSQL("DROP TABLE IF EXISTS " + Person.TABLE);
+        db.execSQL("DROP TABLE IF EXISTS " + Group.TABLE);
         onCreate(db);
     }
 
@@ -91,6 +114,29 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return true;
     }
 
+    //Adding a group to the database
+    public boolean addGroup (String groupName){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(Group.GROUPNAME, groupName);
+        contentValues.put(Group.PEOPLELIST,"");
+
+        long result = db.insert(Group.TABLE, null, contentValues);
+        if (result == -1){
+            return false;
+        }
+        else
+            return true;
+    }
+
+    //Getting all groups from the database
+    public Cursor showGroups(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor search = db.rawQuery("SELECT * FROM "+ Group.TABLE,null);
+        return search;
+    }
+
     //Search for recipes given an ingredient
     public Cursor searchOnIngredient (String ingredient){
         String[] input = {ingredient};
@@ -106,7 +152,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         String searchQ = "SELECT * FROM "+ Recipe.TABLE + " WHERE " + Recipe.INGS + " LIKE ? AND "
                 + Recipe.INGS + " NOT LIKE ?";
-        Cursor search = db.rawQuery(searchQ,etc);
+        Cursor search = db.rawQuery(searchQ, etc);
         return search;
     }
 
@@ -118,7 +164,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(Person.ADJ, adj);
         contentValues.put(Person.LASTNAME, lastName);
         contentValues.put(Person.ALLERGIES, allergies);
-        long result = db.insert(Person.TABLE,null,contentValues);
+        long result = db.insert(Person.TABLE, null, contentValues);
         if (result == -1){
             return false;
         }
@@ -130,6 +176,45 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public Cursor showPeople (){
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor search = db.rawQuery("SELECT * FROM "+ Person.TABLE,null);
+        return search;
+    }
+
+    //Get the ID of a person
+    public Cursor getPersonID (String firstName,String adj, String lastName){
+        String[] data = {firstName,adj,lastName};
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor search = db.rawQuery("SELECT ID FROM "+ Person.TABLE + " WHERE " + Person.FIRSTNAME + " =? AND "
+                + Person.ADJ + " =? AND " + Person.LASTNAME + " =? ",data);
+        return search;
+    }
+
+    //Getting the people from a specific group
+    public Cursor getPeopleFromGroup(String groupName){
+        String[] data = {groupName};
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor search = db.rawQuery("SELECT PEOPLELIST FROM "+ Group.TABLE + " WHERE " + Group.GROUPNAME + " =? ",data);
+        return search;
+    }
+
+    //Adding people to a specific group
+    public boolean addPeopleToGroup (String groupName,String idList){
+        String data[] = {groupName};
+        ContentValues cv = new ContentValues();
+        cv.put("PEOPLELIST", idList);
+        SQLiteDatabase db = this.getReadableDatabase();
+        long result = db.update(Group.TABLE, cv, "GROUPNAME = '" + groupName + "'", null);
+        if (result == -1){
+            return false;
+        }
+        else
+            return true;
+    }
+
+    //Get person by ID
+    public Cursor getPerson (String ID){
+        String[] data = {ID};
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor search = db.rawQuery("SELECT * FROM "+ Person.TABLE + " WHERE " + Person.ID + " =? ",data);
         return search;
     }
 

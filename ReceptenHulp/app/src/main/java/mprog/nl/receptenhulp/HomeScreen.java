@@ -41,6 +41,12 @@ public class HomeScreen extends AppCompatActivity {
         startActivity(intent);
     }
 
+    //Go to the people adding activity
+    public void groupManager (View view) {
+        Intent intent = new Intent(this, GroupManagement.class);
+        startActivity(intent);
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

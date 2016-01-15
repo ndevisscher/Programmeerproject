@@ -12,7 +12,7 @@
             android:name=".HomeScreen"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustNothing" >
+            android:windowSoftInputMode="adjustNothing">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -39,6 +39,10 @@
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustNothing" />
+        <activity
+            android:name=".GroupManagement"
+            android:label="@string/title_activity_group_management"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
