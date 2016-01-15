@@ -38,3 +38,6 @@ Vond een probleem met de emulator cache, waardoor ik dacht dat de database niet 
 #day 8:
 - code een beetje opgeschoond, testvariabelen en methodes verwijdert om de app in zijn geheel te kunnen testen, alles werkt goed zoals het er nu uit ziet.
 - begonnen met het toevoegen van alle strings aan de strings.xml
+
+#day 9:
+Vanwege ziekte en falend internet vrij weinig voor het project gedaan, ik heb een klein beetje nagedacht over het implementeren van groepen in de app en hoe ik het uiterlijk er betere uit kan laten zien.
