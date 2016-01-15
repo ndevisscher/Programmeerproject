@@ -41,3 +41,7 @@ Vond een probleem met de emulator cache, waardoor ik dacht dat de database niet 
 
 #day 9:
 Vanwege ziekte en falend internet vrij weinig voor het project gedaan, ik heb een klein beetje nagedacht over het implementeren van groepen in de app en hoe ik het uiterlijk er betere uit kan laten zien.
+
+#day 10:
+- Groepfunctie geimplementeerd, je kunt nu groepen aanmaken en mensen aan groepen toevoegen. er zit nog een kleine fout in, waarbij de database nog niet doorheeft dat iemand aan een groep is toegevoegd, waardoor je hem meerdere keren kunt toevoegen. Als je naar een andere activity gaat heeft hij wel door dat hij al in de groep zit en kun je hem niet meer toevoegen.
+- Begonnen met het implementeren van de groep zoekfunctie, je moet een groep kunnen selecteren en dan moeten de mensen die in de groep zitten worden toegevoegd aan de zoekopdracht.
