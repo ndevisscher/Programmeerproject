@@ -52,3 +52,4 @@ Vanwege ziekte en falend internet vrij weinig voor het project gedaan, ik heb ee
 
 #day 12:
 - Checks toegevoegd aan verschillende functies die data in de database moeten zetten, hierdoor krijg ik geen duplicaten meer van mensen of groepen.
+- Zoekfunctie compleet gemaakt voor groepen, je kunt nu groepen selecteren die meegenomen moeten worden in de functie, de mensen worden uit de groep gehaald en de allergien van deze mensen worden meegenomen in het zoeken.
