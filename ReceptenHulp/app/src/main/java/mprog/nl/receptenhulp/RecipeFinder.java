@@ -79,6 +79,8 @@ public class RecipeFinder extends AppCompatActivity {
         peopleAdapter = new ArrayAdapter<String>(this, R.layout.person_layout, R.id.person, peopleChoice);
         groupAdapter = new ArrayAdapter<String>(this,R.layout.person_layout,R.id.person,groupChoice);
         people.setAdapter(peopleAdapter);
+        selectedGroups = new ArrayList<>();
+        selectedPeople = new ArrayList<>();
 
         //This switches between selecting people or groups for our recipefinder
         mode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
@@ -88,7 +90,6 @@ public class RecipeFinder extends AppCompatActivity {
                     mode.setText("groepen");
                     people.setAdapter(groupAdapter);
                     groupAdapter.notifyDataSetChanged();
-                    selectedGroups = new ArrayList<>();
                     people.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -104,7 +105,6 @@ public class RecipeFinder extends AppCompatActivity {
                     mode.setText("mensen");
                     people.setAdapter(peopleAdapter);
                     peopleAdapter.notifyDataSetChanged();
-                    selectedPeople = new ArrayList<>();
                     people.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                         @Override
                         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -121,7 +121,6 @@ public class RecipeFinder extends AppCompatActivity {
         });
 
         //We initialize the list the first time, so we don't get an empty listview
-        selectedPeople = new ArrayList<>();
         people.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -182,28 +181,30 @@ public class RecipeFinder extends AppCompatActivity {
         allergies = new ArrayList<>();
         String allergs = "";
         //Adding the allergies from the people in the selected groups to the list
-        for (String name : selectedGroups) {
-            String[] listSplit = {};
-            Cursor getPeople = myDB.getPeopleFromGroup(name);
-            while (getPeople.moveToNext()) {
-                listSplit = getPeople.getString(0).split(" ");
-            }
-            for (String id : listSplit){
-                Cursor search = myDB.getPerson(id);
-                while (search.moveToNext()){
-                    firstname = search.getString(1);
-                    adj = search.getString(2);
-                    lastname = search.getString(3);
-                    Cursor getAllergies = myDB.getAllergie(firstname, adj, lastname);
-                    while (getAllergies.moveToNext()) {
-                        //Splitting the allergies, because we save them as 1 long string with spaces
-                        String[] allergSplit = getAllergies.getString(0).split(" ");
-                        //Adding the allergies to our array, so we can use them for our search later
-                        for (String item : allergSplit) {
-                            if (allergies.contains(item)) {
-                                //do nothing, because the item is already in the list
-                            } else {
-                                allergies.add(item);
+        if (!selectedGroups.isEmpty()) {
+            for (String name : selectedGroups) {
+                String[] listSplit = {};
+                Cursor getPeople = myDB.getPeopleFromGroup(name);
+                while (getPeople.moveToNext()) {
+                    listSplit = getPeople.getString(0).split(" ");
+                }
+                for (String id : listSplit) {
+                    Cursor search = myDB.getPerson(id);
+                    while (search.moveToNext()) {
+                        firstname = search.getString(1);
+                        adj = search.getString(2);
+                        lastname = search.getString(3);
+                        Cursor getAllergies = myDB.getAllergie(firstname, adj, lastname);
+                        while (getAllergies.moveToNext()) {
+                            //Splitting the allergies, because we save them as 1 long string with spaces
+                            String[] allergSplit = getAllergies.getString(0).split(" ");
+                            //Adding the allergies to our array, so we can use them for our search later
+                            for (String item : allergSplit) {
+                                if (allergies.contains(item)) {
+                                    //do nothing, because the item is already in the list
+                                } else {
+                                    allergies.add(item);
+                                }
                             }
                         }
                     }

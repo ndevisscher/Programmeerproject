@@ -14,6 +14,8 @@
     <string name="people_eating">Voeg mensen/groepen toe:</string>
     <string name="add_ingredient">Voeg ingrediënt toe</string>
     <string name="Search_recipes">Zoek recepten</string>
+    <string name="modePeople">mensen</string>
+    <string name="modeGroup">groepen</string>
 
     <string name="add_description">Voeg bereidingswijze toe</string>
     <string name="ings">Ingrediënten:</string>

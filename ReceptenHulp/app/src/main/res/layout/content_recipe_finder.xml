@@ -91,7 +91,7 @@
     <Switch
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="mensen"
+        android:text="@string/modePeople"
         android:id="@+id/modeSwitch"
         android:layout_below="@+id/textView5"
         android:layout_centerHorizontal="true"

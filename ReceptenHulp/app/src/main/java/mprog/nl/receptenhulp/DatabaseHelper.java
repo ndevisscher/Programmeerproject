@@ -151,7 +151,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String[] etc = {ingredients,allergies};
         SQLiteDatabase db = this.getWritableDatabase();
         String searchQ = "SELECT * FROM "+ Recipe.TABLE + " WHERE " + Recipe.INGS + " LIKE ? AND "
-                + Recipe.INGS + " IKE ?";
+                + Recipe.INGS + " LIKE ?";
         Cursor search = db.rawQuery(searchQ, etc);
         return search;
     }
