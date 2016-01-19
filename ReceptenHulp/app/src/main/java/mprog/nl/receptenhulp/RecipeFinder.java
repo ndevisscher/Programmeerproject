@@ -12,9 +12,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -31,7 +32,9 @@ public class RecipeFinder extends AppCompatActivity {
     private ArrayList<String> selectedPeople;
 
     //Nog niet geimplementeerd
+    private ArrayList<String> groupChoice;
     private ArrayList<String> selectedGroups;
+    private ArrayAdapter<String> groupAdapter;
 
     private ArrayAdapter<String> adapter;
     private ArrayAdapter<String> peopleAdapter;
@@ -48,6 +51,8 @@ public class RecipeFinder extends AppCompatActivity {
     String adj;
     String lastname;
 
+    Switch mode;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +60,8 @@ public class RecipeFinder extends AppCompatActivity {
 
         //Initializing the buttons and inputfields
         ingsIn = (EditText) findViewById(R.id.ingsIn);
+
+        mode = (Switch) findViewById(R.id.modeSwitch);
 
         //Setting up the ingredient listview to use for our search
         ListView ings = (ListView) findViewById(R.id.ingsList);
@@ -64,31 +71,57 @@ public class RecipeFinder extends AppCompatActivity {
         ings.setAdapter(adapter);
         ings.setOnItemClickListener(new itemClick());
 
-        //Setting up the listview and checkbox for the people choice
+        //Setting up the listview and checkbox for the people and group choice
         people = (ListView) findViewById(R.id.personList);
         people.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE);
         peopleChoice = new ArrayList<>();
+        groupChoice = new ArrayList<>();
         peopleAdapter = new ArrayAdapter<String>(this, R.layout.person_layout, R.id.person, peopleChoice);
+        groupAdapter = new ArrayAdapter<String>(this,R.layout.person_layout,R.id.person,groupChoice);
         people.setAdapter(peopleAdapter);
 
-        //Here we add people to our selected list and show the user what they have selected with a checkbox
-        selectedPeople = new ArrayList<>();
-        people.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        //This switches between selecting people or groups for our recipefinder
+        mode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String select = peopleChoice.get(position);
-                if (selectedPeople.contains(select)) {
-                    selectedPeople.remove(select);
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    mode.setText("groepen");
+                    people.setAdapter(groupAdapter);
+                    groupAdapter.notifyDataSetChanged();
+                    selectedGroups = new ArrayList<>();
+                    people.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            String select = groupChoice.get(position);
+                            if (selectedGroups.contains(select)) {
+                                selectedGroups.remove(select);
+                            } else {
+                                selectedGroups.add(select);
+                            }
+                        }
+                    });
                 } else {
-                    selectedPeople.add(select);
+                    mode.setText("mensen");
+                    people.setAdapter(peopleAdapter);
+                    peopleAdapter.notifyDataSetChanged();
+                    selectedPeople = new ArrayList<>();
+                    people.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            String select = peopleChoice.get(position);
+                            if (selectedPeople.contains(select)) {
+                                selectedPeople.remove(select);
+                            } else {
+                                selectedPeople.add(select);
+                            }
+                        }
+                    });
                 }
             }
         });
 
-        //Nog niet klaar
-        //Here we add the selectgroups to our list, afterwards we get the individual persons out of this list
-        //and add them to our personlist, so we can search our database for allergies
-        selectedGroups = new ArrayList<>();
+        //We initialize the list the first time, so we don't get an empty listview
+        selectedPeople = new ArrayList<>();
         people.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -112,6 +145,7 @@ public class RecipeFinder extends AppCompatActivity {
 
         //Add people from the database to the list to select them
         showPeople();
+        showGroups();
     }
 
 
@@ -135,7 +169,6 @@ public class RecipeFinder extends AppCompatActivity {
 
     //Searching for the recipes and passing the data to the next activity
     public void fullSearch(View view) {
-
         String[] items = {};
         //New arraylist for the recipes we find, we pass this to the next activity
         recipes = new ArrayList<>(Arrays.asList(items));
@@ -145,10 +178,39 @@ public class RecipeFinder extends AppCompatActivity {
         for (String ing : ingredients) {
             ings = ings + "%" + ing + "%";
         }
-
-        //Getting the allergies from the selected people in the app
+        //The allergies from the people in the app will be stored in these variables
         allergies = new ArrayList<>();
         String allergs = "";
+        //Adding the allergies from the people in the selected groups to the list
+        for (String name : selectedGroups) {
+            String[] listSplit = {};
+            Cursor getPeople = myDB.getPeopleFromGroup(name);
+            while (getPeople.moveToNext()) {
+                listSplit = getPeople.getString(0).split(" ");
+            }
+            for (String id : listSplit){
+                Cursor search = myDB.getPerson(id);
+                while (search.moveToNext()){
+                    firstname = search.getString(1);
+                    adj = search.getString(2);
+                    lastname = search.getString(3);
+                    Cursor getAllergies = myDB.getAllergie(firstname, adj, lastname);
+                    while (getAllergies.moveToNext()) {
+                        //Splitting the allergies, because we save them as 1 long string with spaces
+                        String[] allergSplit = getAllergies.getString(0).split(" ");
+                        //Adding the allergies to our array, so we can use them for our search later
+                        for (String item : allergSplit) {
+                            if (allergies.contains(item)) {
+                                //do nothing, because the item is already in the list
+                            } else {
+                                allergies.add(item);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        //Getting the info from the selected people from the listview
         //Every person is selected individually and we split the name so we can search the database
         for (String Person : selectedPeople) {
             String[] split = Person.split(" ");
@@ -170,22 +232,44 @@ public class RecipeFinder extends AppCompatActivity {
                 }
             }
         }
-
-        //Sorting the allergies alphabetically and removing the first value if needed, because it will
+        //Sorting the allergies alphabetically and removing the first value if needed, because it
         //will be an empty variable
         Collections.sort(allergies);
         if (allergies.size() > 1) {
             allergies.remove(0);
         }
-        for (String allerg : allergies) {
-            allergs = allergs + "%" + allerg + "%";
-        }
 
         //Searching the database for recipes with the given ingredients
         Cursor search;
+        Cursor removal;
         //If allergies are given search with both allergies and ingredients
-        if (!allergs.isEmpty()) {
-            search = myDB.fullSearch(ings, allergs);
+        if (!allergies.isEmpty()) {
+            //First we get all the recipes with the given ingredients
+            search = myDB.searchOnIngredient(ings);
+            //We end the function if there are no results
+            if (search.getCount() == 0) {
+                show("probeer het nogmaals", "er zijn geen resultaten gevonden voor de zoekopdracht");
+                return;
+            }
+            //Adding the recipe names to the array
+            while (search.moveToNext()) {
+                recipes.add(search.getString(1));
+            }
+            //Here we search the database for the recipes with the allergies, if we find a recipe
+            //given the ingredients and allergie we remove it from the array
+            for (String allerg : allergies) {
+                allergs = "%"+allerg+"%";
+                removal = myDB.fullSearch(ings, allergs);
+                while (removal.moveToNext()) {
+                    if (recipes.contains(removal.getString(1))) {
+                        recipes.remove(removal.getString(1));
+                    }
+                }
+            }
+            if (recipes.isEmpty()){
+                show("probeer het nogmaals", "er zijn geen resultaten gevonden voor de zoekopdracht");
+                return;
+            }
         }
         //If no allergies are given, just search on ingredients
         else {
@@ -196,9 +280,7 @@ public class RecipeFinder extends AppCompatActivity {
             Log.d("geen data", "geen data");
             show("probeer het nogmaals", "er zijn geen resultaten gevonden voor de zoekopdracht");
             return;
-        } else
-            Log.d("wel data", "wel data");
-
+        }
         //Adding the names of the recipes from our results to the array
         while (search.moveToNext()) {
             recipes.add(search.getString(1));
@@ -218,6 +300,16 @@ public class RecipeFinder extends AppCompatActivity {
         while (search.moveToNext()) {
             data = search.getString(1) + " " + search.getString(2) + " " + search.getString(3);
             peopleChoice.add(data);
+        }
+    }
+
+    //Shows the groups from the database
+    public void showGroups() {
+        String data = "";
+        Cursor search = myDB.showGroups();
+        while (search.moveToNext()) {
+            data = search.getString(1);
+            groupChoice.add(data);
         }
     }
 
@@ -250,15 +342,6 @@ public class RecipeFinder extends AppCompatActivity {
             item = name.getText().toString();
             ingredients.remove(getIndexByname(item));
             adapter.notifyDataSetChanged();
-        }
-    }
-
-    public void showGroups() {
-        String data = "";
-        Cursor search = myDB.showPeople();
-        while (search.moveToNext()) {
-            data = search.getString(1) + " " + search.getString(2) + " " + search.getString(3);
-            peopleChoice.add(data);
         }
     }
 

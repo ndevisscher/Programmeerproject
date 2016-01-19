@@ -151,7 +151,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String[] etc = {ingredients,allergies};
         SQLiteDatabase db = this.getWritableDatabase();
         String searchQ = "SELECT * FROM "+ Recipe.TABLE + " WHERE " + Recipe.INGS + " LIKE ? AND "
-                + Recipe.INGS + " NOT LIKE ?";
+                + Recipe.INGS + " IKE ?";
         Cursor search = db.rawQuery(searchQ, etc);
         return search;
     }
@@ -186,6 +186,36 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor search = db.rawQuery("SELECT ID FROM "+ Person.TABLE + " WHERE " + Person.FIRSTNAME + " =? AND "
                 + Person.ADJ + " =? AND " + Person.LASTNAME + " =? ",data);
         return search;
+    }
+
+    //Check if a person is in the database, will return false it its not in the database
+    public boolean personCheck (String firstName,String adj, String lastName){
+        boolean check;
+        String[] data = {firstName,adj,lastName};
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor search = db.rawQuery("SELECT ID FROM " + Person.TABLE + " WHERE " + Person.FIRSTNAME + " =? AND "
+                + Person.ADJ + " =? AND " + Person.LASTNAME + " =? ", data);
+        if(search!=null && search.getCount()>0) {
+            check = true;
+        }
+        else{
+            check = false;
+        }
+        return check;
+    }
+
+    public boolean groupCheck (String name){
+        boolean check;
+        String[] data = {name};
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor search = db.rawQuery("SELECT ID FROM " + Group.TABLE + " WHERE " + Group.GROUPNAME + " =? ", data);
+        if(search!=null && search.getCount()>0) {
+            check = true;
+        }
+        else{
+            check = false;
+        }
+        return check;
     }
 
     //Getting the people from a specific group
@@ -224,7 +254,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
         String SelectQ = " SELECT ALLERGIES FROM "+ Person.TABLE + " WHERE " + Person.FIRSTNAME + " =? AND "
                 + Person.ADJ + " =? AND " + Person.LASTNAME + " =? ";
-        Log.d("query", SelectQ);
         Cursor search = db.rawQuery(SelectQ,wanted);
         return search;
     }

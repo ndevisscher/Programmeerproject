@@ -100,7 +100,6 @@ public class SearchedRecipes extends AppCompatActivity {
             Log.d("wel data", "wel data");
         StringBuffer buffer = new StringBuffer();
         while(search.moveToNext()){
-            buffer.append("ID: "+search.getString(0)+"\n");
             buffer.append("RecipeName: "+search.getString(1)+"\n");
             buffer.append("Description: "+search.getString(2)+"\n");
             buffer.append("Ingredients: "+search.getString(3)+"\n");

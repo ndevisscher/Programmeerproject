@@ -104,10 +104,16 @@ public class GroupManagement extends AppCompatActivity {
         //Getting the data from the input
         String name = groupName.getText().toString();
         if(name.length() == 0){
-            show("Ongeldige invoer","elke groep moet een naam hebben");
+            show("Ongeldige invoer","Elke groep moet een naam hebben");
+            return;
+        }
+        if (myDB.groupCheck(name) == true){
+            show("Ongeldige invoer","Deze groep bestaat al");
+            groupName.setText("");
             return;
         }
         myDB.addGroup(name);
+        show("Deze groep is toegevoegd:",name);
         groupName.setText("");
         groupChoice.add(name);
         groupAdapter.notifyDataSetChanged();
@@ -118,6 +124,7 @@ public class GroupManagement extends AppCompatActivity {
         //For every group that is selected people need to be added
         for (String group : selectedGroups) {
             String peopleList = "";
+            String logPeople = "";
             boolean full = true;
             //Getting people from the current group
             Cursor data = myDB.getPeopleFromGroup(group);
@@ -148,6 +155,7 @@ public class GroupManagement extends AppCompatActivity {
                     if (full) {
                         if (!Arrays.asList(check).contains(id)) {
                             idList = id + " " + idList;
+                            logPeople = Person + " , " + logPeople;
                         }
                         else{
                             Log.d("zit al in lijst", id);
@@ -163,6 +171,11 @@ public class GroupManagement extends AppCompatActivity {
             //people in it, it will just be the people we just added
             peopleList = peopleList + " " + idList;
             myDB.addPeopleToGroup(group,peopleList);
+            show("Toegevoegd aan groep: " + group, logPeople);
+            people.clearChoices();
+            peopleAdapter.notifyDataSetChanged();
+            groups.clearChoices();
+            groupAdapter.notifyDataSetChanged();
         }
 
     }

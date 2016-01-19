@@ -95,6 +95,16 @@ public class AddPerson extends AppCompatActivity {
         //Don't input anything if all fields are blank
         if(firstName == "" || lastName ==""){
             show("ongeldige invoer", "Voer een voor- en achternaam in");
+            FirstName.setText("");
+            Adj.setText("");
+            LastName.setText("");
+            return;
+        }
+        if(myDB.personCheck(firstName,adj,lastName) == true){
+            show("ongeldige invoer", "Deze persoon staat al in de database");
+            FirstName.setText("");
+            Adj.setText("");
+            LastName.setText("");
             return;
         }
         String allergies = "";
@@ -107,7 +117,7 @@ public class AddPerson extends AppCompatActivity {
 
         //Adding the person to the database with the given info
         myDB.addPerson(firstName, adj, lastName, allergies);
-
+        show("De volgende persoon is toegevoegd:", firstName + " " + adj + " " + lastName);
         //Emptying the inputfields for other inputs
         FirstName.setText("");
         Adj.setText("");

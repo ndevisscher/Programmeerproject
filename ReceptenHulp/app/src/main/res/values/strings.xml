@@ -11,7 +11,7 @@
     <string name="add_people">Mensen toevoegen</string>
 
     <string name="search_on_ings">Zoek op deze ingrediënten:</string>
-    <string name="people_eating">Deze mensen eten mee:</string>
+    <string name="people_eating">Voeg mensen/groepen toe:</string>
     <string name="add_ingredient">Voeg ingrediënt toe</string>
     <string name="Search_recipes">Zoek recepten</string>
 
@@ -31,5 +31,10 @@
 
     <string name="new_search">Nieuwe zoekopdracht</string>
     <string name="return_home">Terug naar hoofdmenu</string>
+    <string name="newGroupName">Maak een nieuwe groep aan</string>
+    <string name="addPeopleToGroup">Kies mensen om aan de groep toe te voegen</string>
+    <string name="addToGroup">Voeg aan groep toe</string>
+    <string name="makeGroup">Maak groep</string>
+    <string name="groupHint">Geef hier je nieuwe groep een naam</string>
     <string name="title_activity_group_management">GroupManagement</string>
 </resources>
