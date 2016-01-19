@@ -49,3 +49,6 @@ Vanwege ziekte en falend internet vrij weinig voor het project gedaan, ik heb ee
 
 #day 11:
 - Notificaties toegevoegd in de app, dit is om gebruikers te laten weten wat ze hebben toegevoegd aan de database en voor feedback.
+
+#day 12:
+- Checks toegevoegd aan verschillende functies die data in de database moeten zetten, hierdoor krijg ik geen duplicaten meer van mensen of groepen.
