@@ -56,3 +56,9 @@ Vanwege ziekte en falend internet vrij weinig voor het project gedaan, ik heb ee
 
 #day 13:
 - Gezocht naar een goede dataset die ik kan gebruiken om de database al te vullen met recepten, dit zou ervoor moeten zorgen dat de app al bruikbaar is zonder zelf iets toe te voegen.
+
+#day 14:
+- Kleine aanpassingen gemaakt aan de notificaties, het is nu duidelijker te lezen wat er in een recept zit.
+- Als je een ingredient aan de lijst hebt toegevoegd voor een recept kun je deze nu weer verwijderen, handig als je een fout had gemaakt.
+- Ingredienten worden nu met een "," ertussen opgeslagen om het makkelijker te maken de verschillende ingredienten te splitsen.
+- Model classes geimplementeerd voor Person,Group en Recipe. De variables die nodig zijn worden nu opgeroepen in databasehelper.
