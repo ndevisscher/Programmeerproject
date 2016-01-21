@@ -73,10 +73,10 @@ public class AddRecipe extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    //Adding the recipe to the database
+    //Adding the Recipe to the database
     public void addRecipe(View view) {
 
-        //Getting the name of the recipe
+        //Getting the name of the Recipe
         String recipeName = recipeLine.getText().toString();
         String[] test = {recipeName};
 
@@ -86,7 +86,7 @@ public class AddRecipe extends AppCompatActivity {
             ings = ings + " " + ing;
         }
 
-        //Adding the recipe to the database with the given info
+        //Adding the Recipe to the database with the given info
         myDB.addRecipe(recipeName, descript,ings);
 
         //Clearing the datafields
@@ -96,7 +96,7 @@ public class AddRecipe extends AppCompatActivity {
         adapter.notifyDataSetChanged();
     }
 
-    //Adding ingredients to the list to add to the recipe
+    //Adding ingredients to the list to add to the Recipe
     public void addings (View view){
         String testitem = ingLine.getText().toString();
         ingredients.add(testitem);
@@ -104,7 +104,7 @@ public class AddRecipe extends AppCompatActivity {
         ingLine.setText("");
     }
 
-    //A popup so you can add the description for the recipe
+    //A popup so you can add the description for the Recipe
     private void descriptInput() {
         AlertDialog.Builder descriptBuilder = new AlertDialog.Builder(this);
         descriptBuilder.setTitle("bereidingswijze");

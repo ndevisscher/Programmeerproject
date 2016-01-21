@@ -29,7 +29,7 @@ public class HomeScreen extends AppCompatActivity {
         startActivity(intent);
     }
 
-    //Go to the recipe adding activity
+    //Go to the Recipe adding activity
     public void addRecipe (View view) {
         Intent intent = new Intent(this, AddRecipe.class);
         startActivity(intent);

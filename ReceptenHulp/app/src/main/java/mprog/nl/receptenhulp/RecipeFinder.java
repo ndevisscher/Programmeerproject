@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
-public class RecipeFinder extends AppCompatActivity {
+public class RecipeFinder extends AppCompatActivity implements CompoundButton.OnCheckedChangeListener {
 
     //Declaring the various variables
     DatabaseHelper myDB;
@@ -83,42 +83,7 @@ public class RecipeFinder extends AppCompatActivity {
         selectedPeople = new ArrayList<>();
 
         //This switches between selecting people or groups for our recipefinder
-        mode.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    mode.setText("groepen");
-                    people.setAdapter(groupAdapter);
-                    groupAdapter.notifyDataSetChanged();
-                    people.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            String select = groupChoice.get(position);
-                            if (selectedGroups.contains(select)) {
-                                selectedGroups.remove(select);
-                            } else {
-                                selectedGroups.add(select);
-                            }
-                        }
-                    });
-                } else {
-                    mode.setText("mensen");
-                    people.setAdapter(peopleAdapter);
-                    peopleAdapter.notifyDataSetChanged();
-                    people.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            String select = peopleChoice.get(position);
-                            if (selectedPeople.contains(select)) {
-                                selectedPeople.remove(select);
-                            } else {
-                                selectedPeople.add(select);
-                            }
-                        }
-                    });
-                }
-            }
-        });
+        mode.setOnCheckedChangeListener(this);
 
         //We initialize the list the first time, so we don't get an empty listview
         people.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -252,11 +217,11 @@ public class RecipeFinder extends AppCompatActivity {
                 show("probeer het nogmaals", "er zijn geen resultaten gevonden voor de zoekopdracht");
                 return;
             }
-            //Adding the recipe names to the array
+            //Adding the Recipe names to the array
             while (search.moveToNext()) {
                 recipes.add(search.getString(1));
             }
-            //Here we search the database for the recipes with the allergies, if we find a recipe
+            //Here we search the database for the recipes with the allergies, if we find a Recipe
             //given the ingredients and allergie we remove it from the array
             for (String allerg : allergies) {
                 allergs = "%"+allerg+"%";
@@ -278,7 +243,6 @@ public class RecipeFinder extends AppCompatActivity {
         }
         //End the function if no recipes are found
         if (search.getCount() == 0) {
-            Log.d("geen data", "geen data");
             show("probeer het nogmaals", "er zijn geen resultaten gevonden voor de zoekopdracht");
             return;
         }
@@ -330,6 +294,42 @@ public class RecipeFinder extends AppCompatActivity {
                 return ingredients.indexOf(ing);
         }
         return -1;
+    }
+
+    //This handles the switch, so we can swap between selecting people and groups when we are searching
+    @Override
+    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        if (isChecked) {
+            mode.setText("groepen");
+            people.setAdapter(groupAdapter);
+            groupAdapter.notifyDataSetChanged();
+            people.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    String select = groupChoice.get(position);
+                    if (selectedGroups.contains(select)) {
+                        selectedGroups.remove(select);
+                    } else {
+                        selectedGroups.add(select);
+                    }
+                }
+            });
+        } else {
+            mode.setText("mensen");
+            people.setAdapter(peopleAdapter);
+            peopleAdapter.notifyDataSetChanged();
+            people.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    String select = peopleChoice.get(position);
+                    if (selectedPeople.contains(select)) {
+                        selectedPeople.remove(select);
+                    } else {
+                        selectedPeople.add(select);
+                    }
+                }
+            });
+        }
     }
 
     //Deleting ingredients from our search

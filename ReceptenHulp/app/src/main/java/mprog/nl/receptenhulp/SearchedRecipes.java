@@ -40,7 +40,7 @@ public class SearchedRecipes extends AppCompatActivity {
         //Initializing the database for this activity
         myDB = new DatabaseHelper(this);
 
-        //Creating the listview with data, so we can select a recipe
+        //Creating the listview with data, so we can select a Recipe
         ListView List = (ListView)findViewById(R.id.recipeList);
         adapter = new ArrayAdapter<String>(this,R.layout.output_layout,R.id.recipes,recipes);
         List.setAdapter(adapter);
@@ -53,7 +53,7 @@ public class SearchedRecipes extends AppCompatActivity {
 
     }
 
-    //Getting the name of a recipe by clicking the lisview so we can get the info for it
+    //Getting the name of a Recipe by clicking the lisview so we can get the info for it
     class itemClick implements AdapterView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position,
@@ -90,24 +90,23 @@ public class SearchedRecipes extends AppCompatActivity {
     }
 
 
-    //Function to show the info of a recipe given that recipes name
+    //Function to show the info of a Recipe given that recipes name
     public void showRecipe(String[] name){
         String[] rcpName = {recipe};
+        StringBuffer buffer = new StringBuffer();
         Cursor search = myDB.getRecipeInfo(name);
         if (search.getCount() == 0) {
-            Log.d("geen data", "geen data");
-        } else
-            Log.d("wel data", "wel data");
-        StringBuffer buffer = new StringBuffer();
-        while(search.moveToNext()){
-            buffer.append("RecipeName: "+search.getString(1)+"\n");
-            buffer.append("Description: "+search.getString(2)+"\n");
-            buffer.append("Ingredients: "+search.getString(3)+"\n");
+        } else{
+            while(search.moveToNext()) {
+                buffer.append("Naam van het recept: \n" + search.getString(1) + "\n");
+                buffer.append("Ingrediënten: \n" + search.getString(3) + "\n");
+                buffer.append("bereidingswijze: \n" + search.getString(2) + "\n");
+            }
         }
         show("data", buffer.toString());
     }
 
-    //This allows us to show the dialog with info of the recipe
+    //This allows us to show the dialog with info of the Recipe
     public void show(String title, String message){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setCancelable(true);
