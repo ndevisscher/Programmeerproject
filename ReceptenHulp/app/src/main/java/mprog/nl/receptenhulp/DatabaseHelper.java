@@ -11,6 +11,7 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 public class DatabaseHelper extends SQLiteOpenHelper {
 
+    //The name for our database, this is helpfull if we want to find it
     public static final String DATABASE_NAME = "Recipes.db";
 
     public DatabaseHelper(Context context) {
