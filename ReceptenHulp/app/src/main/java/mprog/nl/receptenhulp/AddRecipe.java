@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -34,6 +36,7 @@ public class AddRecipe extends AppCompatActivity {
     String descript = "";
     String ings = "";
     String preperation = "";
+    String item;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +56,7 @@ public class AddRecipe extends AppCompatActivity {
         ingredients = new ArrayList<>(Arrays.asList(items));
         adapter = new ArrayAdapter<String>(this,R.layout.list_item,R.id.ing,ingredients);
         ings.setAdapter(adapter);
+        ings.setOnItemClickListener(new itemClick());
 
         //Initializing the database
         myDB = new DatabaseHelper(this);
@@ -78,16 +82,16 @@ public class AddRecipe extends AppCompatActivity {
 
         //Getting the name of the Recipe
         String recipeName = recipeLine.getText().toString();
-        String[] test = {recipeName};
 
         //Sorting the ingredients
         Collections.sort(ingredients);
         for (String ing : ingredients) {
-            ings = ings + " " + ing;
+            ings = ings + "," + ing;
         }
 
         //Adding the Recipe to the database with the given info
         myDB.addRecipe(recipeName, descript,ings);
+        show("Het volgende recept is toegevoegd: \n", recipeName);
 
         //Clearing the datafields
         recipeLine.setText("");
@@ -98,8 +102,8 @@ public class AddRecipe extends AppCompatActivity {
 
     //Adding ingredients to the list to add to the Recipe
     public void addings (View view){
-        String testitem = ingLine.getText().toString();
-        ingredients.add(testitem);
+        String ingName = ingLine.getText().toString();
+        ingredients.add(ingName);
         adapter.notifyDataSetChanged();
         ingLine.setText("");
     }
@@ -127,6 +131,38 @@ public class AddRecipe extends AppCompatActivity {
     //Actually dispalying the popup for the description when te button is pressed
     public void showDescriptInput (View view){
         descriptInput();
+    }
+
+    //Getting the index of an ingredient
+    public int getIndexByname(String name) {
+        for (String ing : ingredients) {
+            if (ing.equals(name))
+                return ingredients.indexOf(ing);
+        }
+        return -1;
+    }
+
+    //Deleting ingredients the recipe by index
+    class itemClick implements AdapterView.OnItemClickListener {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position,
+                                long id) {
+            ViewGroup vg = (ViewGroup) view;
+            TextView name = (TextView) vg.findViewById(R.id.ing);
+
+            item = name.getText().toString();
+            ingredients.remove(getIndexByname(item));
+            adapter.notifyDataSetChanged();
+        }
+    }
+
+    //Used for showing error messages
+    public void show(String title, String message){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setCancelable(true);
+        builder.setTitle(title);
+        builder.setMessage(message);
+        builder.show();
     }
 
 }

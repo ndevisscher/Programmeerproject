@@ -98,12 +98,19 @@ public class SearchedRecipes extends AppCompatActivity {
         if (search.getCount() == 0) {
         } else{
             while(search.moveToNext()) {
-                buffer.append("Naam van het recept: \n" + search.getString(1) + "\n");
-                buffer.append("Ingrediënten: \n" + search.getString(3) + "\n");
-                buffer.append("bereidingswijze: \n" + search.getString(2) + "\n");
+                buffer.append("Naam van het recept: \n\n" + search.getString(1) + "\n\n");
+                //Splitting all the ingredients by so we can display them easily
+                String[] ings = search.getString(3).split(",");
+                buffer.append("Ingrediënten: \n");
+                for (String ing:ings){
+                    if(ing != "") {
+                        buffer.append(ing + "\n");
+                    }
+                }
+                buffer.append("\nbereidingswijze: \n" + search.getString(2) + "\n");
             }
         }
-        show("data", buffer.toString());
+        show("Receptinformatie", buffer.toString());
     }
 
     //This allows us to show the dialog with info of the Recipe
