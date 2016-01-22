@@ -168,7 +168,12 @@ public class GroupManagement extends AppCompatActivity {
             //people in it, it will just be the people we just added
             peopleList = peopleList + " " + idList;
             myDB.addPeopleToGroup(group,peopleList);
-            show("Toegevoegd aan groep: " + group, logPeople);
+            if(logPeople.isEmpty()){
+                show("Geen toevoeging","al deze mensen zitten al in de groep(en)");
+            }
+            else {
+                show("Toegevoegd aan groep: " + group, logPeople);
+            }
             people.clearChoices();
             peopleAdapter.notifyDataSetChanged();
             groups.clearChoices();
