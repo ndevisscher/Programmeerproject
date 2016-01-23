@@ -7,9 +7,12 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,6 +27,8 @@ public class AddPerson extends AppCompatActivity {
     EditText Adj;
     EditText LastName;
     EditText allergLine;
+
+    String allergie;
 
     private ArrayList<String> ingredients;
     private ArrayAdapter<String> adapter;
@@ -45,6 +50,7 @@ public class AddPerson extends AppCompatActivity {
         ingredients = new ArrayList<>(Arrays.asList(items));
         adapter = new ArrayAdapter<String>(this,R.layout.list_item,R.id.ing,ingredients);
         allergs.setAdapter(adapter);
+        allergs.setOnItemClickListener(new itemClick());
 
         //Initializing the database for this activity
         myDB = new DatabaseHelper(this);
@@ -122,6 +128,29 @@ public class AddPerson extends AppCompatActivity {
         LastName.setText("");
         ingredients.clear();
         adapter.notifyDataSetChanged();
+    }
+
+    //Getting the index of an allergie, so it can be removed from the list
+    public int getIndexByname(String name) {
+        for (String ing : ingredients) {
+            if (ing.equals(name))
+                return ingredients.indexOf(ing);
+        }
+        return -1;
+    }
+
+    //Removing allergies from our list
+    class itemClick implements AdapterView.OnItemClickListener {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position,
+                                long id) {
+            ViewGroup vg = (ViewGroup) view;
+            TextView name = (TextView) vg.findViewById(R.id.ing);
+
+            allergie = name.getText().toString();
+            ingredients.remove(getIndexByname(allergie));
+            adapter.notifyDataSetChanged();
+        }
     }
 
     //Used for showing error messages

@@ -54,13 +54,4 @@ public class HomeScreen extends AppCompatActivity {
         return true;
     }
 
-//    //This is to activate the back button that we use in the toolbar for our app
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        int id = item.getItemId();
-//        if (id == R.id.action_settings) {
-//            return true;
-//        }
-//        return super.onOptionsItemSelected(item);
-//    }
 }

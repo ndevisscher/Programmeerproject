@@ -28,12 +28,12 @@
             android:name=".AddPerson"
             android:label="@string/title_activity_add_person"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustNothing" />
+            android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
             android:name=".AddRecipe"
             android:label="@string/title_activity_selected_recipe"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustNothing" />
+            android:windowSoftInputMode="stateHidden|adjustResize" />
         <activity
             android:name=".SearchedRecipes"
             android:label="@string/title_activity_main"
@@ -42,7 +42,8 @@
         <activity
             android:name=".GroupManagement"
             android:label="@string/title_activity_group_management"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustNothing" ></activity>
     </application>
 
 </manifest>
