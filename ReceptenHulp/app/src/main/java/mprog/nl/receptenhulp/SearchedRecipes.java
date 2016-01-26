@@ -3,10 +3,15 @@ package mprog.nl.receptenhulp;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.Html;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
+import android.view.ContextThemeWrapper;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -89,35 +94,34 @@ public class SearchedRecipes extends AppCompatActivity {
         startActivity(intent);
     }
 
-
     //Function to show the info of a Recipe given that recipes name
+    //I am using html to give some of the lines a different color and style, this is to make it
+    //easier fo the user to read
     public void showRecipe(String[] name){
+        AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.AlertDialogStyle));
+        builder.setCancelable(true);
+        builder.setTitle(Html.fromHtml("<font color='#1f1f14'><i>Receptinformatie</i></font>"));
         StringBuffer buffer = new StringBuffer();
+        String test = "";
         Cursor search = myDB.getRecipeInfo(name);
         if (search.getCount() == 0) {
         } else{
             while(search.moveToNext()) {
-                buffer.append("Naam van het recept: \n\n" + search.getString(1) + "\n\n");
+                test = "<font color='#000000'><i>Naam van het recept:</i></font>" + "<br><br>"
+                        + search.getString(1) + "<br><br>";
                 //Splitting all the ingredients by so we can display them easily
                 String[] ings = search.getString(3).split(",");
-                buffer.append("Ingrediënten: \n");
+                test = test + "<font color='#000000'><i>Ingrediënten:</i></font>" + "<br>";
                 for (String ing:ings){
                     if(ing != "") {
-                        buffer.append(ing + "\n");
+                        test = test + ing + "<br>";
                     }
                 }
-                buffer.append("\nbereidingswijze: \n" + search.getString(2) + "\n");
+                test = test + "<br>" + "<font color='#000000'><i>bereidingswijze:</i></font>"+ "<br>"
+                        + search.getString(2);
             }
         }
-        show("Receptinformatie", buffer.toString());
-    }
-
-    //This allows us to show the dialog with info of the Recipe
-    public void show(String title, String message){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setCancelable(true);
-        builder.setTitle(title);
-        builder.setMessage(message);
+        builder.setMessage(Html.fromHtml(test));
         builder.show();
     }
 
