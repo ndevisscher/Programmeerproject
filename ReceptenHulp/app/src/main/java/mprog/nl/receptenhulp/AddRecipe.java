@@ -142,7 +142,7 @@ public class AddRecipe extends AppCompatActivity {
         return -1;
     }
 
-    //Deleting ingredients the recipe by index
+    //Deleting ingredients from the recipe and listview by index when you click them
     class itemClick implements AdapterView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position,

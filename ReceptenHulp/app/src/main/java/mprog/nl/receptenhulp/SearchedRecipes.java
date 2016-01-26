@@ -92,7 +92,6 @@ public class SearchedRecipes extends AppCompatActivity {
 
     //Function to show the info of a Recipe given that recipes name
     public void showRecipe(String[] name){
-        String[] rcpName = {recipe};
         StringBuffer buffer = new StringBuffer();
         Cursor search = myDB.getRecipeInfo(name);
         if (search.getCount() == 0) {

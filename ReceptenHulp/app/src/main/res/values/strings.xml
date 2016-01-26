@@ -22,7 +22,7 @@
     <string name="add_recipe">Voeg recept toe</string>
     <string name="recipe_hint">vul de naam van het recept in</string>
 
-    <string name="allergs">Allergiën:</string>
+    <string name="allergs">Allergieën:</string>
     <string name="add_allergie">voeg allergie toe</string>
     <string name="add_person">Voeg persoon toe</string>
     <string name="add_person_text">Voeg een persoon toe</string>
@@ -38,5 +38,5 @@
     <string name="addToGroup">Voeg aan groep toe</string>
     <string name="makeGroup">Maak groep</string>
     <string name="groupHint">Geef hier je nieuwe groep een naam</string>
-    <string name="title_activity_group_management">GroupManagement</string>
+    <string name="title_activity_group_management">Groep manager</string>
 </resources>

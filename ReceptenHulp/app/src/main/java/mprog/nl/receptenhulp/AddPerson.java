@@ -96,12 +96,9 @@ public class AddPerson extends AppCompatActivity {
         if(lastName.length() == 0){
             lastName = "";
         }
-        //Don't input anything if all fields are blank
+        //Don't input anything if all essential fields are blank
         if(firstName == "" || lastName ==""){
             show("ongeldige invoer", "Voer een voor- en achternaam in");
-            FirstName.setText("");
-            Adj.setText("");
-            LastName.setText("");
             return;
         }
         if(myDB.personCheck(firstName,adj,lastName) == true){

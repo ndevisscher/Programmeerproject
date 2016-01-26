@@ -44,7 +44,7 @@ public class RecipeFinder extends AppCompatActivity implements CompoundButton.On
 
     ListView people;
 
-    EditText ingsIn;
+    EditText ingsInput;
 
     String item;
     String firstname;
@@ -59,7 +59,7 @@ public class RecipeFinder extends AppCompatActivity implements CompoundButton.On
         setContentView(R.layout.activity_recipe_finder);
 
         //Initializing the buttons and inputfields
-        ingsIn = (EditText) findViewById(R.id.ingsIn);
+        ingsInput = (EditText) findViewById(R.id.ingsInput);
 
         mode = (Switch) findViewById(R.id.modeSwitch);
 
@@ -82,7 +82,7 @@ public class RecipeFinder extends AppCompatActivity implements CompoundButton.On
         selectedGroups = new ArrayList<>();
         selectedPeople = new ArrayList<>();
 
-        //This switches between selecting people or groups for our recipefinder
+        //This lets us switch between selecting people or groups for our recipefinder
         mode.setOnCheckedChangeListener(this);
 
         //We initialize the list the first time, so we don't get an empty listview
@@ -98,7 +98,6 @@ public class RecipeFinder extends AppCompatActivity implements CompoundButton.On
             }
         });
 
-
         //Initializing the database for this activity
         myDB = new DatabaseHelper(this);
 
@@ -107,7 +106,7 @@ public class RecipeFinder extends AppCompatActivity implements CompoundButton.On
         setSupportActionBar(object);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        //Add people from the database to the list to select them
+        //Add people from the database to the lists so we can select them
         showPeople();
         showGroups();
     }
@@ -122,12 +121,12 @@ public class RecipeFinder extends AppCompatActivity implements CompoundButton.On
         return super.onOptionsItemSelected(item);
     }
 
-    //Adding an ingredient to our search
+    //Adding an ingredient to our search and displaying it in the list
     public void addings(View view) {
-        String ingItem = ingsIn.getText().toString();
+        String ingItem = ingsInput.getText().toString();
         ingredients.add(ingItem);
         adapter.notifyDataSetChanged();
-        ingsIn.setText("");
+        ingsInput.setText("");
     }
 
 
@@ -332,7 +331,7 @@ public class RecipeFinder extends AppCompatActivity implements CompoundButton.On
         }
     }
 
-    //Deleting ingredients from our search
+    //Deleting ingredients from our search and the list
     class itemClick implements AdapterView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position,

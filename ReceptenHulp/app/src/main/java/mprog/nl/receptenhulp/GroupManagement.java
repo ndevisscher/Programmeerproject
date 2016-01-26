@@ -226,19 +226,4 @@ public class GroupManagement extends AppCompatActivity {
         builder.show();
     }
 
-    public void test(View view){
-        Cursor search = myDB.showGroups();
-        if (search.getCount() == 0) {
-            Log.d("geen data", "geen data");
-        } else
-            Log.d("wel data", "wel data");
-        StringBuffer buffer = new StringBuffer();
-        while(search.moveToNext()){
-            buffer.append("ID: "+search.getString(0)+"\n");
-            buffer.append("groupname: "+search.getString(1)+"\n");
-            buffer.append("peoplelist: "+search.getString(2)+"\n");
-        }
-        show("data", buffer.toString());
-    }
-
 }

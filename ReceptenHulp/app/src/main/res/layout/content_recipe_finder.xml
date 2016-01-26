@@ -24,7 +24,7 @@
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/ingsIn"
+        android:id="@+id/ingsInput"
         android:layout_marginTop="129dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
@@ -38,7 +38,7 @@
         android:text="@string/add_ingredient"
         android:id="@+id/Add"
         android:onClick="addings"
-        android:layout_alignTop="@+id/ingsIn"
+        android:layout_alignTop="@+id/ingsInput"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 
