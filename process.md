@@ -67,3 +67,4 @@ Vanwege ziekte en falend internet vrij weinig voor het project gedaan, ik heb ee
 - Optimalizatie door testcode weg te halen.
 - Verbeteren van de grammatica op sommige plekken.
 - Verduidelijken van variabelen door nieuwe naamgeving.
+- Alertdialog style change: http://stackoverflow.com/questions/2422562/how-to-change-theme-for-alertdialog
