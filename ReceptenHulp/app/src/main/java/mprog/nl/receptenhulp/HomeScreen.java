@@ -8,6 +8,9 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+/**
+ * Created by Niek de Visscher (10667474)
+ */
 public class HomeScreen extends AppCompatActivity {
 
     DatabaseHelper myDB;

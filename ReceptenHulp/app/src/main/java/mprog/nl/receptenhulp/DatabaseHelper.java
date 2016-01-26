@@ -9,6 +9,11 @@ import android.database.sqlite.SQLiteOpenHelper;
 /**
  * Created by Niek de Visscher (10667474) on 6-1-2016.
  */
+/*
+ I used the following websites to help me set up the database and make the necessary functions:
+    http://www.techotopia.com/index.php/An_Android_Studio_SQLite_Database_Tutorial
+    http://instinctcoder.com/android-studio-sqlite-database-example/
+ */
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     //The name for our database, this is helpfull if we want to find it

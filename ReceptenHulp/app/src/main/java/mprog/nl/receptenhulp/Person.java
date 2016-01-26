@@ -1,7 +1,7 @@
 package mprog.nl.receptenhulp;
 
 /**
- * Created by lol_l on 21-1-2016.
+ * Created by Niek de Visscher (10667474)
  */
 public class Person {
     // Labels table name

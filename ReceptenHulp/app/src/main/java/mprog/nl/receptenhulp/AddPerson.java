@@ -18,6 +18,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 
+/**
+ * Created by Niek de Visscher (10667474)
+ */
 public class AddPerson extends AppCompatActivity {
 
     //Variable declarations

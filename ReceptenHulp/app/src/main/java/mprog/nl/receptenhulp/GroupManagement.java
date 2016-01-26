@@ -17,6 +17,9 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * Created by Niek de Visscher (10667474)
+ */
 public class GroupManagement extends AppCompatActivity {
 
     //Declaring the various variables we need in this activity

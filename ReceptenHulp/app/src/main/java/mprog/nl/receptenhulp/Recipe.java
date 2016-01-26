@@ -1,10 +1,7 @@
 package mprog.nl.receptenhulp;
 
-import android.content.ContentValues;
-import android.database.sqlite.SQLiteDatabase;
-
 /**
- * Created by niek on 21-1-2016.
+ * Created by Niek de Visscher (10667474)
  */
 public class Recipe {
     DatabaseHelper myDB;

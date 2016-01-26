@@ -23,6 +23,9 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+/**
+ * Created by Niek de Visscher (10667474)
+ */
 public class SearchedRecipes extends AppCompatActivity {
 
     //Declaring the various variables
