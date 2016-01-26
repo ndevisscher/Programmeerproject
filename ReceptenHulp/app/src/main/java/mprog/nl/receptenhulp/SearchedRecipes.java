@@ -95,8 +95,10 @@ public class SearchedRecipes extends AppCompatActivity {
     }
 
     //Function to show the info of a Recipe given that recipes name
-    //I am using html to give some of the lines a different color and style, this is to make it
-    //easier fo the user to read
+    /*I am using html to give some of the lines a different color and style, this is to make it
+    * easier for the user to read, is used this as a tutorial/help:
+    * http://stackoverflow.com/questions/33437398/how-to-change-textcolor-in-alertdialog
+    */
     public void showRecipe(String[] name){
         AlertDialog.Builder builder = new AlertDialog.Builder(new ContextThemeWrapper(this, R.style.AlertDialogStyle));
         builder.setCancelable(true);
