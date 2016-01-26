@@ -62,3 +62,8 @@ Vanwege ziekte en falend internet vrij weinig voor het project gedaan, ik heb ee
 - Als je een ingredient aan de lijst hebt toegevoegd voor een recept kun je deze nu weer verwijderen, handig als je een fout had gemaakt.
 - Ingredienten worden nu met een "," ertussen opgeslagen om het makkelijker te maken de verschillende ingredienten te splitsen.
 - Model classes geimplementeerd voor Person,Group en Recipe. De variables die nodig zijn worden nu opgeroepen in databasehelper.
+
+#Last days:
+- Optimalizatie door testcode weg te halen.
+- Verbeteren van de grammatica op sommige plekken.
+- Verduidelijken van variabelen door nieuwe naamgeving.
