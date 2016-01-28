@@ -18,18 +18,9 @@ De activity's zelf zijn niet heel uitzonderlijk. Er wordt gebruik gemaakt van si
 
 ####Activity's:
 
-#####Home scherm:
-![alt text](https://github.com/ndevisscher/Programmeerproject/blob/master/doc/HomeFinal.png "1")
-#####Recept zoeken:
-![alt text](https://github.com/ndevisscher/Programmeerproject/blob/master/doc/ZoekReceptFinal.png "1")
-#####Receptinvoer:
-![alt text](https://github.com/ndevisscher/Programmeerproject/blob/master/doc/receptInvoerFinal.png "1")
-#####Persooninvoer:
-![alt text](https://github.com/ndevisscher/Programmeerproject/blob/master/doc/PersoonInvoerFinal.png "1")
-#####Groepenmanagement:
-![alt text](https://github.com/ndevisscher/Programmeerproject/blob/master/doc/groepManagerFinal.png "1")
-#####Gevonden recepten:
-![alt text](https://github.com/ndevisscher/Programmeerproject/blob/master/doc/gevondenReceptenFinal.png "1")
+#####HActiviteiten verloop:
+![alt text](https://github.com/ndevisscher/Programmeerproject/blob/master/doc/activityVerloop.png "1")
+
 
 ####API's and Frameworks:
 - Standaard API van android appstudio en de gegeven frameworks van dit programma. 
