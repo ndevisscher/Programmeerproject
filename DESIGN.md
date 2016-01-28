@@ -27,6 +27,7 @@ Ik maak gebruik van een aantal tabellen in een database die met elkaar in verbin
 Voor het maken van de databse en de opbouw hiervan heb ik gebruik gemaakt van de volgende websites:
 <br>
 http://www.techotopia.com/index.php/An_Android_Studio_SQLite_Database_Tutorial
+<br>
 http://instinctcoder.com/android-studio-sqlite-database-example/
 
 ####Databasestructuur:
