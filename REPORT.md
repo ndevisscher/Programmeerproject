@@ -21,6 +21,18 @@ De activity's zelf zijn niet heel uitzonderlijk. Er wordt gebruik gemaakt van si
 #####Activiteiten verloop:
 ![alt text](https://github.com/ndevisscher/Programmeerproject/blob/master/doc/activityVerloop.png "1")
 
+#####Home scherm:
+Hier wordt geen data binnengehaald, hiervandaan kan genavigeerd worden naar de verschillende activiteiten
+#####Recept zoeken:
+Hier wordt uit de database de lijsten met mensen en groepen binnen gehaald. Verder wordt er de userinput gebruikt voor de ingrediënten waar men op wil zoeken. De zoekfunctie wordt binnen deze activiteit uitgevoerd en de resultaten hiervan worden doorgegeven naar de "gevonden recepten" activiteit.
+#####Receptinvoer:
+Hier wordt de input van de user opgevangen en doorgegeven naar de database. Het gaat hier om het ingeven van nieuwe recepten met een naam, ingrediëntenlijst en beschrijving. Deze data wordt via een databasehelper in de database verwerkt in de Recipes_table.
+#####Persooninvoer:
+Hier wordt ook de input van de user opgevangen om mensen aan de database toe te voegen. Hiervoor wordt de volledige naam van de persoon die toegevoegd moet worden gevraagd en de mogelijke allergieën die de persoon heeft. Deze persoon wordt dan aan de Person_table toegevoegd.
+#####Groepenmanagement:
+Hier wordt de input van de gebruiker gevraagd als er een nieuwe groep aangemaakt moet worden. Er wordt ook de lijst met alle groepen en mensen uit de database gehaald en getoond aan de gebruiker. De gebruiker kan dan alle groepen selecteren waar mensen aan moeten worden toegevoegd en alle mensen selecteren die moeten worden toegevoegd.
+#####Gevonden recepten:
+Hier wordt een lijst getoon met alle recepten die zijn gevonden die voldeden aan de eisen van de zoekfunctie. Als er op een receptnaam wordt geklikt wordt de informatie van het recept getoond, de naam, ingrediënten en bereidingswijze.
 
 ####API's and Frameworks:
 - Standaard API van android appstudio en de gegeven frameworks van dit programma. 
