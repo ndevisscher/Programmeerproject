@@ -18,6 +18,20 @@ De activity's zelf zijn niet heel uitzonderlijk. Er wordt gebruik gemaakt van si
 
 ####Activity's:
 
+#####Home scherm:
+![alt text](https://github.com/ndevisscher/Programmeerproject/blob/master/doc/Home.png "1")
+#####Recept zoeken:
+![alt text](https://github.com/ndevisscher/Programmeerproject/blob/master/doc/ZoekRecept.png "1")
+#####Receptinvoer:
+![alt text](https://github.com/ndevisscher/Programmeerproject/blob/master/doc/receptInvoer.png "1")
+#####Persooninvoer:
+![alt text](https://github.com/ndevisscher/Programmeerproject/blob/master/doc/PersoonInvoer.png "1")
+#####Groepenmanagement:
+
+
+####API's and Frameworks:
+- Standaard API van android appstudio en de gegeven frameworks van dit programma. 
+- SQlite Database
 
 ####Uitdagingen:
 Aan het begin van het project had ik een ander idee voor de database en de opbouw hiervan. Zo had ik het idee om een individuele tabel te maken van ingrediënten, en deze te koppelen aan recepten en mensen. Zo zouden ingrediënten de ID's krijgen van recepten waar ze in voor kwamen en zouden mensen de ID's van ingrediënten meekrijgen waar ze allergisch voor zijn. Ik heb er uiteindelijk voor gekozen om dit niet op deze manier te doen, omdat het erg omslachtig zou worden om de juiste gegevens door te geven. Zo wordt een ID pas aangemaakt als iets wordt toegevoegd aan de database. Hierdoor zou ik of een lijst moeten hebben met alle mogelijke ingrediënten die in een gerecht zouden kunnen zitten of zou ik telkens als een nieuw ingrediënt wordt toegevoegd een work-around moeten maken om het ID van het zojuist toegevoegde ingrediënt toe te kunnen voegen aan een persoon. Ook kan ik het ID van een recept pas ophalen als het is toegevoegd, dus zou ik pas na een recept te hebben toegevoegd kunnen aangeven welke ingrediënten voorkomen in het recept. Ik heb er nu dus voor gekozen om deze ingrediënten op te slaan onder de recepten en mensen zelf. Dit maakte het ook makkelijker om de zoekfunctie te implementeren, aangezien men nu kan zoeken op bijvoorbeeld "meel" als er als ingrediënt "500ml meel" in het recept staat. Dit zou veel moeilijker te implementeren zijn als ik was uitgegaan van een vaste lijst ingrediënten.
@@ -28,4 +42,3 @@ Op het moment werkt de app zoals ik het voor ogen had, je kunt namelijk als gebr
 Wat ik nog zou willen verbeteren/toevoegen is de mogelijkheid voor aanpassingen. Het was niet meer mogelijk in de korte tijd om dit af te krijgen, maar op dit moment is het niet mogelijk om iets aan te passen als het eenmaal in de database staat. Dit geldt voor de recepten, mensen en groepen. Je kunt een recept niet aanpassen nadat je het hebt ingevoerd. Zo kun je ook niet aanpassen welke allergiën iemand heeft, dit zou onhandig kunnen zijn als iemand een allergie ontwikkelt en hij/zij al in de database staat. Ook kun je mensen niet uit groepen halen of groepen verwijderen. Als een groep niet meer nodig is wil je hem waarschijnijk verwijderen, zodat de rest overzichtelijker is en je wilt ook vergissingen kunnen rechtzetten als je per ongeluk iemand aan de verkeerde groep hebt toegevoegd. 
 Het is uiteindelijk niet gelukt om een goede lijst van recepten te vinden die makkelijk om te zetten waren naar mijn database. Het zou handig zijn geweest om alvast een lijst met recepten mee te kunnen geven, zodat de gebruiker alvast iets te zoeken had. Het zou mogelijk zijn om al deze recepten handmatig in te voeren, maar dit zou heel veel tijd kosten, vandaar dat ik niet voor deze optie heb gekozen.
 
-Ondanks deze kleine terkortkomingen ben ik zeer tevreden over het project en het eindresultaat. Het was een leuke ervaring om in zo'n korte tijd een volledige app af te moeten krijgen. 
