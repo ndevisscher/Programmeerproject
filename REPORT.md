@@ -18,7 +18,7 @@ De activity's zelf zijn niet heel uitzonderlijk. Er wordt gebruik gemaakt van si
 
 ####Activity's:
 
-#####HActiviteiten verloop:
+#####Activiteiten verloop:
 ![alt text](https://github.com/ndevisscher/Programmeerproject/blob/master/doc/activityVerloop.png "1")
 
 
