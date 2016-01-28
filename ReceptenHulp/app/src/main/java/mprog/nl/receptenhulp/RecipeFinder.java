@@ -126,7 +126,7 @@ public class RecipeFinder extends AppCompatActivity implements CompoundButton.On
 
     //Adding an ingredient to our search and displaying it in the list
     public void addings(View view) {
-        String ingItem = ingsInput.getText().toString();
+        String ingItem = ingsInput.getText().toString().toLowerCase();
         ingredients.add(ingItem);
         adapter.notifyDataSetChanged();
         ingsInput.setText("");

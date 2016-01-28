@@ -105,7 +105,7 @@ public class AddRecipe extends AppCompatActivity {
 
     //Adding ingredients to the list to add to the Recipe
     public void addings (View view){
-        String ingName = ingLine.getText().toString();
+        String ingName = ingLine.getText().toString().toLowerCase();
         ingredients.add(ingName);
         adapter.notifyDataSetChanged();
         ingLine.setText("");
